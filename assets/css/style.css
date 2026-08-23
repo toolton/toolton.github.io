@@ -530,3 +530,52 @@ a {
         text-align: center;
     }
 }
+
+
+/* =========================================
+   TOOLTON — ABOUT SECTION POLISH
+   ========================================= */
+
+.about {
+    width: 100%;
+    max-width: 1100px;
+    margin: 80px auto 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.about > * {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about h2 {
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.about p {
+    text-align: center;
+    line-height: 1.7;
+    color: #666;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .about {
+        margin-top: 55px;
+        padding: 0 12px;
+    }
+
+    .about h2 {
+        font-size: 1.7rem;
+    }
+
+    .about p {
+        font-size: .9rem;
+    }
+}
