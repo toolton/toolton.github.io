@@ -441,220 +441,137 @@ a {
     }
 }
 
-/* =========================================
-   TOOLTON — GLOBAL ABOUT & FOOTER
-   ========================================= */
+/* =========================
+   ABOUT — FINAL
+========================= */
 
 .about-section {
     width: 100%;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
+    padding: 100px 0;
 }
 
-.about-section h2,
-.about-section h3 {
-    text-align: center;
-}
-
-.about-section p {
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* ===== GLOBAL FOOTER ===== */
-
-.site-footer {
-    width: 100%;
-    margin-top: 80px;
-    border-top: 1px solid #e9e9e9;
-    background: #fafafa;
-}
-
-.site-footer .footer-inner {
-    width: min(1100px, calc(100% - 32px));
-    min-height: 110px;
+.about-section > .container {
+    width: min(100% - 40px, var(--max-width));
     margin: 0 auto;
-    padding: 28px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    box-sizing: border-box;
-}
-
-.site-footer strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #111;
-    font-size: 1.05rem;
-    font-weight: 900;
-}
-
-.site-footer p {
-    margin: 0;
-    color: #777;
-    font-size: .8rem;
-}
-
-.site-footer .copyright {
-    text-align: right;
-}
-
-
-/* ===== MOBILE ===== */
-
-@media (max-width: 600px) {
-
-    .about-section {
-        width: calc(100% - 24px);
-    }
-
-    .site-footer {
-        margin-top: 55px;
-    }
-
-    .site-footer .footer-inner {
-        min-height: auto;
-        padding: 25px 0;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 12px;
-    }
-
-    .site-footer .copyright {
-        text-align: center;
-    }
-}
-
-/* ===== TOOLTON ABOUT SECTION — FINAL ===== */
-
-.about-section {
-    width: 100%;
-    margin: 0;
-    padding: 80px 0;
-}
-
-.about-section .container {
-    width: min(1100px, calc(100% - 32px));
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .about-box {
     width: 100%;
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 40px;
-    box-sizing: border-box;
+    max-width: 780px;
+    margin: 0 auto;
     text-align: center;
 }
 
 .about-box .section-label {
-    display: block;
-    text-align: center;
+    display: inline-block;
+    margin-bottom: 18px;
 }
 
 .about-box h2 {
-    max-width: 750px;
-    margin: 14px auto 18px;
-    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
 }
 
 .about-box p {
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 650px;
+    margin: 24px auto 0;
+    color: var(--muted);
+    font-size: 1rem;
     line-height: 1.7;
 }
 
 
-/* Mobile */
+/* =========================
+   FOOTER — FINAL
+========================= */
 
-@media (max-width: 600px) {
+.site-footer {
+    width: 100%;
+    margin: 0;
+    padding: 35px 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.footer-inner {
+    width: min(100% - 40px, var(--max-width));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.site-footer strong {
+    display: block;
+    font-size: 1.05rem;
+}
+
+.site-footer p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.copyright {
+    text-align: right;
+}
+
+
+/* =========================
+   ABOUT + FOOTER MOBILE
+========================= */
+
+@media (max-width: 800px) {
 
     .about-section {
-        padding: 55px 0;
+        padding: 70px 0;
     }
 
-    .about-section .container {
+    .about-section > .container {
+        width: min(100% - 28px, var(--max-width));
+    }
+
+    .about-box {
+        max-width: 700px;
+    }
+
+    .footer-inner {
+        width: min(100% - 28px, var(--max-width));
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .copyright {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .about-section {
+        padding: 60px 0;
+    }
+
+    .about-section > .container {
         width: calc(100% - 24px);
     }
 
     .about-box {
-        padding: 25px 10px;
-    }
-
-    .about-box h2 {
-        font-size: 1.7rem;
+        width: 100%;
     }
 
     .about-box p {
-        font-size: .9rem;
+        font-size: 0.92rem;
+    }
+
+    .footer-inner {
+        width: calc(100% - 24px);
     }
 }
 
-/* ===== ABOUT — EXACT CENTER ===== */
 
-.about-section {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.about-section .container {
-    width: min(1100px, calc(100% - 32px)) !important;
-    max-width: 1100px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.about-section .about-box {
-    width: min(850px, 100%) !important;
-    max-width: 850px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    text-align: center !important;
-}
-
-.about-section .about-box h2,
-.about-section .about-box p,
-.about-section .about-box .section-label {
-    text-align: center !important;
-}
-
-/* ===== TOOLTON ABOUT FINAL OVERRIDE ===== */
-
-section.about-section > .container {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 16px !important;
-    box-sizing: border-box !important;
-}
-
-section.about-section .about-box {
-    width: 100% !important;
-    max-width: 760px !important;
-    margin: 0 auto !important;
-    padding: 40px 20px !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-}
-
-section.about-section .about-box .section-label,
-section.about-section .about-box h2,
-section.about-section .about-box p {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    text-align: center !important;
-}
