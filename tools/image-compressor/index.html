@@ -469,6 +469,137 @@
     }
 }
 
+/* ===== TOOLTON IMAGE COMPRESSOR UI FIX ===== */
+
+.compressor-page {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.compressor-page > .container {
+    width: min(1100px, calc(100% - 32px));
+    max-width: 1100px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box;
+}
+
+.tool-intro {
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.compressor-app {
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.tool-information {
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.upload-area {
+    width: auto;
+    box-sizing: border-box;
+}
+
+.selected-file {
+    width: auto;
+    box-sizing: border-box;
+}
+
+.preview-area {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.preview-area img {
+    max-width: min(100%, 700px);
+    width: auto;
+    height: auto;
+}
+
+.settings-area {
+    width: auto;
+    box-sizing: border-box;
+}
+
+.result {
+    width: auto;
+    box-sizing: border-box;
+}
+
+
+/* ===== HEADER ALIGNMENT ===== */
+
+.site-header .header-inner {
+    width: min(1100px, calc(100% - 32px));
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 700px) {
+
+    .compressor-page > .container,
+    .site-header .header-inner {
+        width: calc(100% - 24px);
+    }
+
+    .tool-intro {
+        width: 100%;
+    }
+
+    .tool-intro h1 {
+        font-size: clamp(2.4rem, 12vw, 3.5rem);
+    }
+
+    .compressor-app {
+        width: 100%;
+    }
+
+    .upload-area {
+        margin: 12px;
+    }
+
+    .selected-file {
+        margin: 12px;
+    }
+
+    .preview-area {
+        min-height: 220px;
+    }
+
+}
+
+
+/* ===== PREVENT HORIZONTAL SCROLL ===== */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+    
 </style>
 </head>
 
