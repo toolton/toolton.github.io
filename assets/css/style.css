@@ -631,3 +631,30 @@ a {
 .about-section .about-box .section-label {
     text-align: center !important;
 }
+
+/* ===== TOOLTON ABOUT FINAL OVERRIDE ===== */
+
+section.about-section > .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+}
+
+section.about-section .about-box {
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+}
+
+section.about-section .about-box .section-label,
+section.about-section .about-box h2,
+section.about-section .about-box p {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
