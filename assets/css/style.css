@@ -440,3 +440,93 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================
+   TOOLTON — GLOBAL ABOUT & FOOTER
+   ========================================= */
+
+.about-section {
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.about-section h2,
+.about-section h3 {
+    text-align: center;
+}
+
+.about-section p {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ===== GLOBAL FOOTER ===== */
+
+.site-footer {
+    width: 100%;
+    margin-top: 80px;
+    border-top: 1px solid #e9e9e9;
+    background: #fafafa;
+}
+
+.site-footer .footer-inner {
+    width: min(1100px, calc(100% - 32px));
+    min-height: 110px;
+    margin: 0 auto;
+    padding: 28px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+.site-footer strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #111;
+    font-size: 1.05rem;
+    font-weight: 900;
+}
+
+.site-footer p {
+    margin: 0;
+    color: #777;
+    font-size: .8rem;
+}
+
+.site-footer .copyright {
+    text-align: right;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 600px) {
+
+    .about-section {
+        width: calc(100% - 24px);
+    }
+
+    .site-footer {
+        margin-top: 55px;
+    }
+
+    .site-footer .footer-inner {
+        min-height: auto;
+        padding: 25px 0;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .site-footer .copyright {
+        text-align: center;
+    }
+}
