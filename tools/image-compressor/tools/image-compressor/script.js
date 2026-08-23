@@ -1,3 +1,5 @@
+console.log("TOOLTON COMPRESSOR JS LOADED");
+
 "use strict";
 
 /* =========================
