@@ -598,3 +598,6 @@ a {
         font-size: .9rem;
     }
 }
+.about-section {
+    background: red !important;
+}
