@@ -520,6 +520,24 @@ a {
     text-align: right;
 }
 
+.footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-size: 0.82rem;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--text);
+}
+
 
 /* =========================
    ABOUT + FOOTER MOBILE
@@ -571,6 +589,11 @@ a {
 
     .footer-inner {
         width: calc(100% - 24px);
+    }
+
+    .footer-links {
+    justify-content: center;
+    gap: 14px 18px;
     }
 }
 
