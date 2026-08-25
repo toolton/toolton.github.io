@@ -1,34 +1,967 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Code Generator — Create QR Codes Free | Toolton</title>
-<meta name="description" content="Create QR codes for URLs, text, email addresses, phone numbers and more. Free browser-based QR Code Generator by Toolton.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://toolton.github.io/tools/qr-code-generator/">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="stylesheet" href="../../../assets/css/style.css">
-<style>
-.qr-page{padding:55px 0 90px}.qr-page>.container{width:min(1100px,calc(100% - 32px));margin:auto}.breadcrumb{display:flex;gap:7px;margin-bottom:32px;color:#777;font-size:.85rem}.breadcrumb a{color:#333}.tool-intro{max-width:760px;margin-bottom:38px}.tool-intro h1{margin:10px 0 17px;font-size:clamp(2.6rem,7vw,4.8rem);line-height:.98;letter-spacing:-.06em}.tool-intro p{color:#666;font-size:1.05rem}.qr-app{max-width:900px;margin:auto;border:1px solid #e1e1e1;border-radius:24px;background:#fff;box-shadow:0 12px 45px rgba(0,0,0,.06);overflow:hidden}.qr-layout{display:grid;grid-template-columns:1.2fr .8fr}.qr-input{padding:28px;border-right:1px solid #e7e7e7}.qr-preview{padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fafafa;text-align:center}.label{display:block;margin-bottom:9px;font-size:.8rem;font-weight:800}.qr-text{width:100%;min-height:180px;resize:vertical;padding:15px;border:1px solid #d8d8d8;border-radius:12px;outline:none;font:inherit}.options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.option{padding:14px;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa}.option label{display:block;margin-bottom:7px;font-size:.78rem;font-weight:700;color:#555}.option select{width:100%;height:42px;border:1px solid #d8d8d8;border-radius:9px;background:#fff;padding:0 8px}.generate,.download{width:100%;min-height:50px;border:0;border-radius:10px;background:#111;color:#fff;font:inherit;font-weight:800;cursor:pointer}.generate{margin-top:17px}.download{display:none;margin-top:12px;text-decoration:none;align-items:center;justify-content:center}.download.show{display:flex}.status{min-height:20px;margin-top:10px;color:#777;font-size:.8rem;text-align:center}#qrcode{width:260px;height:260px;display:grid;place-items:center;padding:10px;background:#fff;border:1px solid #e4e4e4;border-radius:16px}.placeholder{color:#888;font-size:.82rem}.privacy{margin:20px;padding:15px;border-radius:11px;background:#f7f7f7;color:#666;font-size:.8rem}.info{max-width:900px;margin:60px auto 0}.info h2{font-size:2rem;letter-spacing:-.04em;margin-bottom:14px}.info h3{margin:27px 0 8px}.info p{color:#666;line-height:1.7}@media(max-width:700px){.qr-page{padding-top:35px}.qr-page>.container{width:calc(100% - 24px)}.qr-layout{grid-template-columns:1fr}.qr-input{border-right:0;border-bottom:1px solid #e7e7e7;padding:18px}.qr-preview{padding:22px 18px}.options{grid-template-columns:1fr}#qrcode{width:230px;height:230px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Free QR Code Generator Online — Create QR Codes | Toolton</title>
+
+    <meta name="description"
+          content="Create a free QR code online from a URL, text, email or phone number. Generate and download QR codes as PNG directly in your browser with Toolton.">
+
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="canonical"
+          href="https://toolton.github.io/tools/qr-code-generator/">
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title"
+          content="Free QR Code Generator Online | Toolton">
+    <meta property="og:description"
+          content="Create and download QR codes from URLs, text, email addresses and phone numbers for free.">
+    <meta property="og:url"
+          content="https://toolton.github.io/tools/qr-code-generator/">
+    <meta property="og:site_name" content="Toolton">
+
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+
+    <style>
+        .qr-page {
+            padding: 55px 0 90px;
+        }
+
+        .qr-page > .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            margin-bottom: 32px;
+            color: #777;
+            font-size: .85rem;
+        }
+
+        .breadcrumb a {
+            color: #333;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .tool-intro {
+            max-width: 780px;
+            margin-bottom: 38px;
+        }
+
+        .tool-intro h1 {
+            margin: 10px 0 17px;
+            font-size: clamp(2.5rem, 7vw, 4.8rem);
+            line-height: .98;
+            letter-spacing: -.06em;
+        }
+
+        .tool-intro p {
+            max-width: 700px;
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .qr-app {
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+            border: 1px solid #e1e1e1;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 12px 45px rgba(0,0,0,.06);
+        }
+
+        .qr-layout {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+        }
+
+        .qr-input {
+            padding: 28px;
+            border-right: 1px solid #e7e7e7;
+        }
+
+        .qr-preview {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: .8rem;
+            font-weight: 800;
+        }
+
+        .qr-text {
+            width: 100%;
+            min-height: 180px;
+            resize: vertical;
+            padding: 15px;
+            border: 1px solid #d8d8d8;
+            border-radius: 12px;
+            outline: none;
+            font: inherit;
+            line-height: 1.5;
+        }
+
+        .qr-text:focus {
+            border-color: #999;
+            box-shadow: 0 0 0 3px rgba(0,0,0,.04);
+        }
+
+        .field-help {
+            margin-top: 8px;
+            color: #777;
+            font-size: .78rem;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .option {
+            padding: 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fafafa;
+        }
+
+        .option label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: .78rem;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .option select {
+            width: 100%;
+            height: 42px;
+            border: 1px solid #d8d8d8;
+            border-radius: 9px;
+            background: #fff;
+            padding: 0 8px;
+            font: inherit;
+        }
+
+        .generate,
+        .download {
+            width: 100%;
+            min-height: 50px;
+            border: 0;
+            border-radius: 10px;
+            background: #111;
+            color: #fff;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .generate {
+            margin-top: 17px;
+        }
+
+        .generate:hover,
+        .download:hover {
+            opacity: .92;
+            transform: translateY(-1px);
+        }
+
+        .download {
+            display: none;
+            margin-top: 12px;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .download.show {
+            display: flex;
+        }
+
+        .status {
+            min-height: 20px;
+            margin-top: 10px;
+            color: #777;
+            font-size: .8rem;
+            text-align: center;
+        }
+
+        #qrcode {
+            width: 260px;
+            height: 260px;
+            display: grid;
+            place-items: center;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #e4e4e4;
+            border-radius: 16px;
+        }
+
+        .placeholder {
+            color: #888;
+            font-size: .82rem;
+        }
+
+        .privacy {
+            margin: 20px;
+            padding: 15px;
+            border-radius: 11px;
+            background: #f7f7f7;
+            color: #666;
+            font-size: .8rem;
+            line-height: 1.6;
+        }
+
+        .privacy strong {
+            color: #222;
+        }
+
+        .info {
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        .info h2 {
+            margin-bottom: 14px;
+            font-size: 2rem;
+            letter-spacing: -.04em;
+        }
+
+        .info h3 {
+            margin: 30px 0 9px;
+            font-size: 1.2rem;
+        }
+
+        .info p {
+            margin-bottom: 16px;
+            color: #666;
+            line-height: 1.75;
+        }
+
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 22px 0 35px;
+        }
+
+        .use-case {
+            padding: 18px;
+            border: 1px solid #e5e5e5;
+            border-radius: 14px;
+            background: #fafafa;
+        }
+
+        .use-case h3 {
+            margin: 0 0 7px;
+            font-size: 1rem;
+        }
+
+        .use-case p {
+            margin: 0;
+            font-size: .9rem;
+        }
+
+        .related-tools {
+            margin-top: 45px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .related-tools h2 {
+            margin-bottom: 16px;
+        }
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .related-links a {
+            display: inline-flex;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            color: #222;
+            text-decoration: none;
+            background: #fff;
+            font-size: .9rem;
+            font-weight: 700;
+        }
+
+        .related-links a:hover {
+            background: #f7f7f7;
+        }
+
+        .faq {
+            margin-top: 45px;
+        }
+
+        .faq-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .faq-item h3 {
+            margin: 0 0 9px;
+            font-size: 1rem;
+        }
+
+        .faq-item p {
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
+
+            .qr-page {
+                padding-top: 35px;
+            }
+
+            .qr-page > .container {
+                width: calc(100% - 24px);
+            }
+
+            .qr-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-input {
+                border-right: 0;
+                border-bottom: 1px solid #e7e7e7;
+                padding: 18px;
+            }
+
+            .qr-preview {
+                padding: 22px 18px;
+            }
+
+            .options,
+            .use-cases {
+                grid-template-columns: 1fr;
+            }
+
+            #qrcode {
+                width: 230px;
+                height: 230px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<header class="site-header"><div class="container header-inner"><a href="../../../" class="logo" aria-label="Toolton Home">Toolton</a><nav class="navigation" aria-label="Main navigation"><a href="../../../#tools">Tools</a><a href="../../../#categories">Categories</a></nav></div></header>
-<main class="qr-page"><div class="container">
-<div class="breadcrumb"><a href="../../../">Toolton</a><span>›</span><span>QR Code Generator</span></div>
-<div class="tool-intro"><span class="section-label">FREE QR TOOL</span><h1>QR Code Generator</h1><p>Create a QR code from any URL or text and download it as a PNG image. Everything is generated in your browser.</p></div>
-<section class="qr-app" aria-label="QR Code Generator"><div class="qr-layout">
-<div class="qr-input"><label class="label" for="text">Text or URL</label><textarea id="text" class="qr-text" placeholder="https://example.com"></textarea><div class="options"><div class="option"><label for="size">QR size</label><select id="size"><option value="180">180 × 180</option><option value="220" selected>220 × 220</option><option value="280">280 × 280</option><option value="320">320 × 320</option></select></div><div class="option"><label for="margin">Margin</label><select id="margin"><option value="0">None</option><option value="2" selected>Small</option><option value="4">Medium</option><option value="8">Large</option></select></div></div><button class="generate" id="generate">Generate QR Code</button><div class="status" id="status" aria-live="polite"></div></div>
-<div class="qr-preview"><h2 style="font-size:1rem;margin:0 0 15px">Your QR code</h2><div id="qrcode"><span class="placeholder">Your QR code will appear here</span></div><a id="download" class="download" download="toolton-qr-code.png">Download PNG</a></div>
-</div><div class="privacy"><strong>Privacy:</strong> Your QR content is processed in your browser and is not uploaded to Toolton.</div></section>
-<section class="info"><h2>Free QR Code Generator</h2><p>Turn a URL, text, email address, phone number or other information into a scannable QR code. Generate it instantly and save the result as a PNG.</p><h3>How to use it</h3><p>Enter your content, choose the size and margin, then select Generate QR Code. When the code appears, choose Download PNG.</p><h3>No account required</h3><p>The tool runs in your browser, so you can create a QR code without uploading your content to a Toolton server.</p></section>
-</div></main>
-<footer class="site-footer"><div class="container footer-inner"><div><strong>Toolton</strong><p>Useful tools. One simple place.</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="../../../about.html">About</a><a href="../../../contact.html">Contact</a><a href="../../../privacy.html">Privacy</a><a href="../../../terms.html">Terms</a><a href="../../../disclaimer.html">Disclaimer</a></nav><p class="copyright">© 2026 Toolton. All rights reserved.</p></div></footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <a href="../../../"
+           class="logo"
+           aria-label="Toolton Home">
+            Toolton
+        </a>
+
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="../../../#tools">Tools</a>
+            <a href="../../../#categories">Categories</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="qr-page">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../../../">Toolton</a>
+            <span>›</span>
+            <span>QR Code Generator</span>
+        </div>
+
+
+        <div class="tool-intro">
+
+            <span class="section-label">FREE QR TOOL</span>
+
+            <h1>Free QR Code Generator</h1>
+
+            <p>
+                Create a QR code online for free from a URL,
+                website link, plain text, email address, phone number
+                or other information. Generate and download your QR
+                code as a PNG directly in your browser.
+            </p>
+
+        </div>
+
+
+        <section class="qr-app"
+                 aria-label="Free QR Code Generator">
+
+            <div class="qr-layout">
+
+                <div class="qr-input">
+
+                    <label class="label" for="text">
+                        Text or URL
+                    </label>
+
+                    <textarea
+                        id="text"
+                        class="qr-text"
+                        placeholder="https://example.com"
+                        aria-label="Text or URL for QR code"
+                    ></textarea>
+
+                    <p class="field-help">
+                        You can enter a website URL, text,
+                        email address, phone number or other content.
+                    </p>
+
+
+                    <div class="options">
+
+                        <div class="option">
+
+                            <label for="size">
+                                QR code size
+                            </label>
+
+                            <select id="size">
+
+                                <option value="180">
+                                    180 × 180
+                                </option>
+
+                                <option value="220" selected>
+                                    220 × 220
+                                </option>
+
+                                <option value="280">
+                                    280 × 280
+                                </option>
+
+                                <option value="320">
+                                    320 × 320
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <label for="margin">
+                                QR code margin
+                            </label>
+
+                            <select id="margin">
+
+                                <option value="0">
+                                    None
+                                </option>
+
+                                <option value="2" selected>
+                                    Small
+                                </option>
+
+                                <option value="4">
+                                    Medium
+                                </option>
+
+                                <option value="8">
+                                    Large
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="generate"
+                        id="generate"
+                        type="button"
+                    >
+                        Generate QR Code
+                    </button>
+
+                    <div
+                        class="status"
+                        id="status"
+                        aria-live="polite"
+                    ></div>
+
+                </div>
+
+
+                <div class="qr-preview">
+
+                    <h2 style="font-size:1rem;margin:0 0 15px">
+                        Your QR code
+                    </h2>
+
+                    <div id="qrcode">
+
+                        <span class="placeholder">
+                            Your QR code will appear here
+                        </span>
+
+                    </div>
+
+                    <a
+                        id="download"
+                        class="download"
+                        download="toolton-qr-code.png"
+                    >
+                        Download PNG
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="privacy">
+
+                <strong>Privacy:</strong>
+                Your QR content is processed in your browser.
+                It is not uploaded to a Toolton server.
+
+            </div>
+
+        </section>
+
+
+        <section class="info">
+
+            <h2>Free QR Code Generator Online</h2>
+
+            <p>
+                Toolton's free QR Code Generator lets you create
+                a QR code from a website URL, text, email address,
+                phone number and other text-based information.
+                The generated QR code can be downloaded as a PNG image.
+            </p>
+
+
+            <h3>How to create a QR code</h3>
+
+            <p>
+                Enter your URL or text in the box above, choose the
+                QR code size and margin, and select
+                <strong>Generate QR Code</strong>.
+                Once your QR code appears, select
+                <strong>Download PNG</strong> to save it.
+            </p>
+
+
+            <h3>What can you put in a QR code?</h3>
+
+            <div class="use-cases">
+
+                <div class="use-case">
+
+                    <h3>Website URL</h3>
+
+                    <p>
+                        Create a QR code that opens a website,
+                        landing page or online resource.
+                    </p>
+
+                </div>
+
+
+                <div class="use-case">
+
+                    <h3>Plain text</h3>
+
+                    <p>
+                        Turn a short message, note or other
+                        text into a scannable QR code.
+                    </p>
+
+                </div>
+
+
+                <div class="use-case">
+
+                    <h3>Email address</h3>
+
+                    <p>
+                        Create a QR code containing an email
+                        address or email-related information.
+                    </p>
+
+                </div>
+
+
+                <div class="use-case">
+
+                    <h3>Phone number</h3>
+
+                    <p>
+                        Create a QR code containing a phone
+                        number for easy scanning.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <h3>QR code for a website or URL</h3>
+
+            <p>
+                To make a QR code for a website, paste the complete
+                URL into the text box. For example:
+                <strong>https://example.com</strong>.
+                After scanning the generated code with a phone,
+                the device can use the encoded URL.
+            </p>
+
+
+            <h3>Is this QR Code Generator free?</h3>
+
+            <p>
+                Yes. Toolton's QR Code Generator is free to use
+                and does not require an account.
+            </p>
+
+
+            <h3>Does Toolton store my QR code content?</h3>
+
+            <p>
+                No. QR generation happens in your browser.
+                Your entered content is not sent to a Toolton
+                server by this tool.
+            </p>
+
+
+            <section class="faq">
+
+                <h2>QR Code Generator FAQs</h2>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        How do I create a QR code?
+                    </h3>
+
+                    <p>
+                        Enter your URL or text into the QR Code
+                        Generator, choose the desired size and
+                        select Generate QR Code.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Can I create a QR code from a URL?
+                    </h3>
+
+                    <p>
+                        Yes. Paste the complete website URL into
+                        the input box and generate the QR code.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Can I create a QR code from text?
+                    </h3>
+
+                    <p>
+                        Yes. The tool can encode plain text as
+                        well as URLs and other text-based content.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Can I download the QR code?
+                    </h3>
+
+                    <p>
+                        Yes. After generating the code, select
+                        Download PNG to save the QR code as an image.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Is this QR code generator free?
+                    </h3>
+
+                    <p>
+                        Yes. You can generate QR codes for free
+                        without creating an account.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Is my QR code data uploaded?
+                    </h3>
+
+                    <p>
+                        No. The QR code is generated in your
+                        browser, so the entered content is not
+                        uploaded to Toolton.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="related-tools">
+
+                <h2>More Free Tools</h2>
+
+                <div class="related-links">
+
+                    <a href="../../../tools/image-compressor/">
+                        Image Compressor
+                    </a>
+
+                    <a href="../../../tools/image-resizer/">
+                        Image Resizer
+                    </a>
+
+                    <a href="../../../">
+                        All Toolton Tools
+                    </a>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <strong>Toolton</strong>
+
+            <p>
+                Useful tools. One simple place.
+            </p>
+
+        </div>
+
+
+        <nav class="footer-links"
+             aria-label="Footer navigation">
+
+            <a href="../../../about.html">About</a>
+            <a href="../../../contact.html">Contact</a>
+            <a href="../../../privacy.html">Privacy</a>
+            <a href="../../../terms.html">Terms</a>
+            <a href="../../../disclaimer.html">Disclaimer</a>
+
+        </nav>
+
+
+        <p class="copyright">
+            © 2026 Toolton. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
-const text=document.getElementById('text'),size=document.getElementById('size'),margin=document.getElementById('margin'),box=document.getElementById('qrcode'),download=document.getElementById('download'),status=document.getElementById('status');
-document.getElementById('generate').addEventListener('click',()=>{const value=text.value.trim();box.innerHTML='';download.classList.remove('show');if(!value){box.innerHTML='<span class="placeholder">Enter text or a URL first</span>';status.textContent='Nothing to generate yet.';return}const s=Number(size.value),m=Number(margin.value);new QRCode(box,{text:value,width:s,height:s,colorDark:'#111111',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});setTimeout(()=>{const canvas=box.querySelector('canvas');if(canvas){const out=document.createElement('canvas'),p=m*4;out.width=s+p*2;out.height=s+p*2;const ctx=out.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,out.width,out.height);ctx.drawImage(canvas,p,p,s,s);out.toBlob(blob=>{download.href=URL.createObjectURL(blob);download.classList.add('show')},'image/png')}status.textContent='QR code generated successfully.'},50)});
+
+const text =
+    document.getElementById('text');
+
+const size =
+    document.getElementById('size');
+
+const margin =
+    document.getElementById('margin');
+
+const box =
+    document.getElementById('qrcode');
+
+const download =
+    document.getElementById('download');
+
+const status =
+    document.getElementById('status');
+
+
+document
+    .getElementById('generate')
+    .addEventListener('click', () => {
+
+        const value =
+            text.value.trim();
+
+        box.innerHTML = '';
+
+        download.classList.remove('show');
+
+
+        if (!value) {
+
+            box.innerHTML =
+                '<span class="placeholder">Enter text or a URL first</span>';
+
+            status.textContent =
+                'Nothing to generate yet.';
+
+            return;
+        }
+
+
+        const s =
+            Number(size.value);
+
+        const m =
+            Number(margin.value);
+
+
+        new QRCode(box, {
+
+            text: value,
+
+            width: s,
+
+            height: s,
+
+            colorDark: '#111111',
+
+            colorLight: '#ffffff',
+
+            correctLevel:
+                QRCode.CorrectLevel.M
+
+        });
+
+
+        setTimeout(() => {
+
+            const canvas =
+                box.querySelector('canvas');
+
+
+            if (canvas) {
+
+                const out =
+                    document.createElement('canvas');
+
+                const p =
+                    m * 4;
+
+
+                out.width =
+                    s + p * 2;
+
+                out.height =
+                    s + p * 2;
+
+
+                const ctx =
+                    out.getContext('2d');
+
+
+                ctx.fillStyle =
+                    '#ffffff';
+
+
+                ctx.fillRect(
+                    0,
+                    0,
+                    out.width,
+                    out.height
+                );
+
+
+                ctx.drawImage(
+                    canvas,
+                    p,
+                    p,
+                    s,
+                    s
+                );
+
+
+                out.toBlob(blob => {
+
+                    download.href =
+                        URL.createObjectURL(blob);
+
+                    download.classList.add('show');
+
+                }, 'image/png');
+
+            }
+
+
+            status.textContent =
+                'QR code generated successfully.';
+
+        }, 50);
+
+    });
+
 </script>
+
 </body>
 </html>
