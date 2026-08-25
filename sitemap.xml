@@ -30,4 +30,12 @@
         <loc>https://toolton.github.io/tools/image-compressor/</loc>
     </url>
 
+    <url>
+        <loc>https://toolton.github.io/tools/qr-code-generator/</loc>
+    </url>
+
+    <url>
+        <loc>https://toolton.github.io/tools/image-resizer/</loc>
+    </url>
+
 </urlset>
