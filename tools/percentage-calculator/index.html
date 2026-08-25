@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Percentage Calculator Online — Free % Calculator | Toolton</title>
+
+    <meta name="description"
+          content="Free percentage calculator online. Calculate X% of Y, find what percentage one number is of another, and calculate percentage increase or decrease instantly.">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical"
+          href="https://toolton.github.io/tools/percentage-calculator/">
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title"
+          content="Percentage Calculator Online — Free % Calculator">
+    <meta property="og:description"
+          content="Calculate percentages, percentage increase and percentage decrease online for free with Toolton.">
+    <meta property="og:url"
+          content="https://toolton.github.io/tools/percentage-calculator/">
+    <meta property="og:site_name" content="Toolton">
+
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+
+    <style>
+        .percentage-page {
+            padding: 55px 0 90px;
+        }
+
+        .percentage-page > .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            margin-bottom: 32px;
+            color: #777;
+            font-size: .85rem;
+        }
+
+        .breadcrumb a {
+            color: #333;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .tool-intro {
+            max-width: 780px;
+            margin-bottom: 38px;
+        }
+
+        .tool-intro h1 {
+            margin: 10px 0 17px;
+            font-size: clamp(2.5rem, 7vw, 4.8rem);
+            line-height: .98;
+            letter-spacing: -.06em;
+        }
+
+        .tool-intro p {
+            max-width: 720px;
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .calculator-card {
+            padding: 24px;
+            border: 1px solid #e1e1e1;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 10px 35px rgba(0,0,0,.05);
+        }
+
+        .calculator-card h2 {
+            margin: 0 0 9px;
+            font-size: 1.1rem;
+        }
+
+        .calculator-card > p {
+            min-height: 48px;
+            margin-bottom: 18px;
+            color: #777;
+            font-size: .82rem;
+            line-height: 1.55;
+        }
+
+        .field {
+            margin-bottom: 13px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: .78rem;
+            font-weight: 800;
+            color: #444;
+        }
+
+        .field input {
+            width: 100%;
+            height: 46px;
+            padding: 0 12px;
+            border: 1px solid #d8d8d8;
+            border-radius: 9px;
+            outline: none;
+            font: inherit;
+        }
+
+        .field input:focus {
+            border-color: #999;
+        }
+
+        .calculate-button {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 4px;
+            border: 0;
+            border-radius: 9px;
+            background: #111;
+            color: #fff;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .calculate-button:hover {
+            opacity: .9;
+        }
+
+        .result {
+            min-height: 58px;
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #f7f7f7;
+            color: #222;
+            font-size: .9rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+        }
+
+        .result strong {
+            font-size: 1.1rem;
+        }
+
+        .info {
+            max-width: 900px;
+            margin: 65px auto 0;
+        }
+
+        .info h2 {
+            margin-bottom: 14px;
+            font-size: 2rem;
+            letter-spacing: -.04em;
+        }
+
+        .info h3 {
+            margin: 30px 0 9px;
+            font-size: 1.15rem;
+        }
+
+        .info p {
+            margin-bottom: 16px;
+            color: #666;
+            line-height: 1.75;
+        }
+
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 22px 0 35px;
+        }
+
+        .example {
+            padding: 18px;
+            border: 1px solid #e5e5e5;
+            border-radius: 14px;
+            background: #fafafa;
+        }
+
+        .example h3 {
+            margin: 0 0 7px;
+            font-size: 1rem;
+        }
+
+        .example p {
+            margin: 0;
+            font-size: .9rem;
+        }
+
+        .faq {
+            margin-top: 50px;
+        }
+
+        .faq-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .faq-item h3 {
+            margin: 0 0 9px;
+            font-size: 1rem;
+        }
+
+        .faq-item p {
+            margin: 0;
+        }
+
+        .related-tools {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .related-links a {
+            display: inline-flex;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            color: #222;
+            text-decoration: none;
+            background: #fff;
+            font-size: .9rem;
+            font-weight: 700;
+        }
+
+        .related-links a:hover {
+            background: #f7f7f7;
+        }
+
+        @media (max-width: 850px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .percentage-page {
+                padding-top: 35px;
+            }
+
+            .percentage-page > .container {
+                width: calc(100% - 24px);
+            }
+
+            .examples {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <a href="../../../"
+           class="logo"
+           aria-label="Toolton Home">
+            Toolton
+        </a>
+
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="../../../#tools">Tools</a>
+            <a href="../../../#categories">Categories</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="percentage-page">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../../../">Toolton</a>
+            <span>›</span>
+            <span>Percentage Calculator</span>
+        </div>
+
+
+        <div class="tool-intro">
+
+            <span class="section-label">FREE CALCULATOR</span>
+
+            <h1>Percentage Calculator</h1>
+
+            <p>
+                Calculate percentages online for free.
+                Find a percentage of a number, find what percentage
+                one number is of another, or calculate percentage
+                increase and decrease instantly.
+            </p>
+
+        </div>
+
+
+        <section class="calculator-grid"
+                 aria-label="Percentage calculators">
+
+
+            <!-- Calculator 1 -->
+
+            <div class="calculator-card">
+
+                <h2>What is X% of Y?</h2>
+
+                <p>
+                    Find a percentage of any number.
+                    Example: What is 25% of 400?
+                </p>
+
+
+                <div class="field">
+
+                    <label for="percentOf">
+                        Percentage
+                    </label>
+
+                    <input
+                        id="percentOf"
+                        type="number"
+                        step="any"
+                        placeholder="25"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="numberOf">
+                        Number
+                    </label>
+
+                    <input
+                        id="numberOf"
+                        type="number"
+                        step="any"
+                        placeholder="400"
+                    >
+
+                </div>
+
+
+                <button
+                    class="calculate-button"
+                    id="calculateOf"
+                    type="button">
+                    Calculate
+                </button>
+
+
+                <div
+                    class="result"
+                    id="resultOf"
+                    aria-live="polite">
+                    Enter values to calculate.
+                </div>
+
+            </div>
+
+
+            <!-- Calculator 2 -->
+
+            <div class="calculator-card">
+
+                <h2>X is what % of Y?</h2>
+
+                <p>
+                    Find what percentage one number represents
+                    of another number.
+                </p>
+
+
+                <div class="field">
+
+                    <label for="partNumber">
+                        Number
+                    </label>
+
+                    <input
+                        id="partNumber"
+                        type="number"
+                        step="any"
+                        placeholder="50"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="wholeNumber">
+                        Total
+                    </label>
+
+                    <input
+                        id="wholeNumber"
+                        type="number"
+                        step="any"
+                        placeholder="200"
+                    >
+
+                </div>
+
+
+                <button
+                    class="calculate-button"
+                    id="calculateWhatPercent"
+                    type="button">
+                    Calculate
+                </button>
+
+
+                <div
+                    class="result"
+                    id="resultWhatPercent"
+                    aria-live="polite">
+                    Enter values to calculate.
+                </div>
+
+            </div>
+
+
+            <!-- Calculator 3 -->
+
+            <div class="calculator-card">
+
+                <h2>Percentage Increase / Decrease</h2>
+
+                <p>
+                    Calculate the percentage change between
+                    an original value and a new value.
+                </p>
+
+
+                <div class="field">
+
+                    <label for="oldValue">
+                        Original value
+                    </label>
+
+                    <input
+                        id="oldValue"
+                        type="number"
+                        step="any"
+                        placeholder="80"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="newValue">
+                        New value
+                    </label>
+
+                    <input
+                        id="newValue"
+                        type="number"
+                        step="any"
+                        placeholder="120"
+                    >
+
+                </div>
+
+
+                <button
+                    class="calculate-button"
+                    id="calculateChange"
+                    type="button">
+                    Calculate
+                </button>
+
+
+                <div
+                    class="result"
+                    id="resultChange"
+                    aria-live="polite">
+                    Enter values to calculate.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="info">
+
+            <h2>How to Calculate Percentages</h2>
+
+            <p>
+                A percentage represents a number as a fraction
+                of 100. Use the calculators above to quickly
+                solve common percentage problems without doing
+                the calculation manually.
+            </p>
+
+
+            <h3>What is X% of Y?</h3>
+
+            <p>
+                To find X% of Y, multiply X by Y and divide
+                the result by 100.
+            </p>
+
+            <p>
+                <strong>Formula:</strong>
+                X% of Y = (X ÷ 100) × Y
+            </p>
+
+
+            <h3>X is what percentage of Y?</h3>
+
+            <p>
+                Divide the first number by the total number
+                and multiply the result by 100.
+            </p>
+
+            <p>
+                <strong>Formula:</strong>
+                Percentage = (X ÷ Y) × 100
+            </p>
+
+
+            <h3>How to calculate percentage increase or decrease</h3>
+
+            <p>
+                Subtract the original value from the new value,
+                divide the difference by the original value,
+                and multiply by 100.
+            </p>
+
+            <p>
+                <strong>Formula:</strong>
+                Percentage change =
+                ((New value − Original value) ÷ Original value) × 100
+            </p>
+
+
+            <div class="examples">
+
+                <div class="example">
+
+                    <h3>Example: 25% of 400</h3>
+
+                    <p>
+                        25 ÷ 100 × 400 = <strong>100</strong>
+                    </p>
+
+                </div>
+
+
+                <div class="example">
+
+                    <h3>Example: 50 is what % of 200?</h3>
+
+                    <p>
+                        50 ÷ 200 × 100 = <strong>25%</strong>
+                    </p>
+
+                </div>
+
+
+                <div class="example">
+
+                    <h3>Example: 80 to 120</h3>
+
+                    <p>
+                        The increase is
+                        <strong>50%</strong>.
+                    </p>
+
+                </div>
+
+
+                <div class="example">
+
+                    <h3>Example: 200 to 150</h3>
+
+                    <p>
+                        The decrease is
+                        <strong>25%</strong>.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <h3>Percentage calculator for discounts</h3>
+
+            <p>
+                You can use the percentage calculator to understand
+                discounts and price changes. For example, to find
+                a 20% discount on ₹1,000, calculate 20% of 1,000,
+                which is ₹200. The price after the discount is ₹800.
+            </p>
+
+
+            <h3>Percentage calculator for exam marks</h3>
+
+            <p>
+                To calculate exam percentage, divide the marks
+                obtained by the total marks and multiply by 100.
+                For example, 450 marks out of 500 is 90%.
+            </p>
+
+
+            <section class="faq">
+
+                <h2>Percentage Calculator FAQs</h2>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        How do I calculate a percentage?
+                    </h3>
+
+                    <p>
+                        Divide the part by the total and multiply
+                        by 100. For example, 25 out of 100 is 25%.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        What is 25% of 400?
+                    </h3>
+
+                    <p>
+                        25% of 400 is 100.
+                        Enter 25 and 400 in the first calculator
+                        above to verify the result.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        What percentage is 50 of 200?
+                    </h3>
+
+                    <p>
+                        50 is 25% of 200.
+                        Use the second calculator to calculate
+                        this type of percentage.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        How do I calculate percentage increase?
+                    </h3>
+
+                    <p>
+                        Subtract the original value from the new
+                        value, divide by the original value and
+                        multiply by 100.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        How do I calculate percentage decrease?
+                    </h3>
+
+                    <p>
+                        Subtract the new value from the original
+                        value, divide the difference by the original
+                        value and multiply by 100.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        How do I calculate exam percentage?
+                    </h3>
+
+                    <p>
+                        Divide the marks obtained by the total marks
+                        and multiply by 100. For example,
+                        450 out of 500 equals 90%.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Can I use this calculator for discounts?
+                    </h3>
+
+                    <p>
+                        Yes. Use the first calculator to find the
+                        discount amount, then subtract that amount
+                        from the original price.
+                    </p>
+
+                </div>
+
+
+                <div class="faq-item">
+
+                    <h3>
+                        Is this percentage calculator free?
+                    </h3>
+
+                    <p>
+                        Yes. Toolton's Percentage Calculator is
+                        free to use and does not require an account.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="related-tools">
+
+                <h2>More Free Toolton Tools</h2>
+
+                <p>
+                    Try these other free online tools from Toolton.
+                </p>
+
+                <div class="related-links">
+
+                    <a href="../../../tools/image-compressor/">
+                        Image Compressor
+                    </a>
+
+                    <a href="../../../tools/image-resizer/">
+                        Image Resizer
+                    </a>
+
+                    <a href="../../../tools/qr-code-generator/">
+                        QR Code Generator
+                    </a>
+
+                    <a href="../../../">
+                        All Tools
+                    </a>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <strong>Toolton</strong>
+
+            <p>
+                Useful tools. One simple place.
+            </p>
+
+        </div>
+
+
+        <nav class="footer-links"
+             aria-label="Footer navigation">
+
+            <a href="../../../about.html">About</a>
+            <a href="../../../contact.html">Contact</a>
+            <a href="../../../privacy.html">Privacy</a>
+            <a href="../../../terms.html">Terms</a>
+            <a href="../../../disclaimer.html">Disclaimer</a>
+
+        </nav>
+
+
+        <p class="copyright">
+            © 2026 Toolton. All rights reserved.
+        </p>
+
+    
+
+      </div>
+
+</footer>
+
+
+<script>
+
+function cleanNumber(number) {
+
+    if (!Number.isFinite(number)) {
+        return null;
+    }
+
+    const rounded =
+        Math.round((number + Number.EPSILON) * 100000000) / 100000000;
+
+    return rounded;
+}
+
+
+function formatNumber(number) {
+
+    const clean =
+        cleanNumber(number);
+
+    if (clean === null) {
+        return "";
+    }
+
+    return clean.toLocaleString("en-US", {
+        maximumFractionDigits: 8
+    });
+}
+
+
+/* X% of Y */
+
+document
+    .getElementById("calculateOf")
+    .addEventListener("click", function () {
+
+        const percent =
+            parseFloat(
+                document.getElementById("percentOf").value
+            );
+
+        const number =
+            parseFloat(
+                document.getElementById("numberOf").value
+            );
+
+        const result =
+            document.getElementById("resultOf");
+
+
+        if (!Number.isFinite(percent) ||
+            !Number.isFinite(number)) {
+
+            result.textContent =
+                "Please enter both numbers.";
+
+            return;
+        }
+
+
+        const answer =
+            (percent / 100) * number;
+
+
+        result.innerHTML =
+            "<strong>" +
+            formatNumber(answer) +
+            "</strong>";
+    });
+
+
+/* X is what % of Y */
+
+document
+    .getElementById("calculateWhatPercent")
+    .addEventListener("click", function () {
+
+        const part =
+            parseFloat(
+                document.getElementById("partNumber").value
+            );
+
+        const whole =
+            parseFloat(
+                document.getElementById("wholeNumber").value
+            );
+
+        const result =
+            document.getElementById("resultWhatPercent");
+
+
+        if (!Number.isFinite(part) ||
+            !Number.isFinite(whole)) {
+
+            result.textContent =
+                "Please enter both numbers.";
+
+            return;
+        }
+
+
+        if (whole === 0) {
+
+            result.textContent =
+                "The total cannot be zero.";
+
+            return;
+        }
+
+
+        const answer =
+            (part / whole) * 100;
+
+
+        result.innerHTML =
+            "<strong>" +
+            formatNumber(answer) +
+            "%</strong>";
+    });
+
+
+/* Percentage increase / decrease */
+
+document
+    .getElementById("calculateChange")
+    .addEventListener("click", function () {
+
+        const oldValue =
+            parseFloat(
+                document.getElementById("oldValue").value
+            );
+
+        const newValue =
+            parseFloat(
+                document.getElementById("newValue").value
+            );
+
+        const result =
+            document.getElementById("resultChange");
+
+
+        if (!Number.isFinite(oldValue) ||
+            !Number.isFinite(newValue)) {
+
+            result.textContent =
+                "Please enter both values.";
+
+            return;
+        }
+
+
+        if (oldValue === 0) {
+
+            result.textContent =
+                "The original value cannot be zero.";
+
+            return;
+        }
+
+
+        const change =
+            ((newValue - oldValue) / oldValue) * 100;
+
+
+        const absoluteChange =
+            Math.abs(change);
+
+
+        if (change > 0) {
+
+            result.innerHTML =
+                "<strong>" +
+                formatNumber(absoluteChange) +
+                "% increase</strong>";
+
+        } else if (change < 0) {
+
+            result.innerHTML =
+                "<strong>" +
+                formatNumber(absoluteChange) +
+                "% decrease</strong>";
+
+        } else {
+
+            result.innerHTML =
+                "<strong>0% change</strong>";
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
