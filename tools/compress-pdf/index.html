@@ -28,8 +28,8 @@ content="https://toolton.github.io/tools/compress-pdf/">
 <link rel="stylesheet" href="../../../assets/css/style.css">
 
 <!-- PDF processing library -->
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs" type="module"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
 <style>
 
 /* ================================
@@ -1204,7 +1204,23 @@ content="https://toolton.github.io/tools/compress-pdf/">
 
 </footer>
 
-<script>
+
+
+     <script type="module">
+
+import * as pdfjsLib from
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+
+
+const { jsPDF } = window.jspdf;
+
+
+/* ================================
+   ELEMENTS
+================================ */
 
 const fileInput =
     document.getElementById("fileInput");
@@ -1278,20 +1294,26 @@ let outputUrl = null;
 function formatBytes(bytes){
 
     if(bytes < 1024){
+
         return bytes + " B";
+
     }
 
     if(bytes < 1024 * 1024){
+
         return (bytes / 1024).toFixed(1) + " KB";
+
     }
 
     return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+
 }
 
 
 function showStatus(message){
 
     status.textContent = message;
+
     status.classList.add("visible");
 
 }
@@ -1300,6 +1322,7 @@ function showStatus(message){
 function hideStatus(){
 
     status.textContent = "";
+
     status.classList.remove("visible");
 
 }
@@ -1312,6 +1335,7 @@ function clearResult(){
     if(outputUrl){
 
         URL.revokeObjectURL(outputUrl);
+
         outputUrl = null;
 
     }
@@ -1325,19 +1349,22 @@ function clearResult(){
    TARGET SIZE
 ================================ */
 
-targetSize.addEventListener("change", function(){
+targetSize.addEventListener(
+    "change",
+    function(){
 
-    if(this.value === "custom"){
+        if(this.value === "custom"){
 
-        customTarget.classList.add("visible");
+            customTarget.classList.add("visible");
 
-    }else{
+        }else{
 
-        customTarget.classList.remove("visible");
+            customTarget.classList.remove("visible");
+
+        }
 
     }
-
-});
+);
 
 
 function getTargetKB(){
@@ -1348,7 +1375,9 @@ function getTargetKB(){
             Number(customSize.value);
 
         if(!value || value < 20){
+
             return null;
+
         }
 
         return value;
@@ -1361,27 +1390,78 @@ function getTargetKB(){
 
 
 /* ================================
-   PDF PAGE COUNT
+   COMPRESSION SETTINGS
+================================ */
+
+function getCompressionSettings(){
+
+    const level =
+        compressionLevel.value;
+
+
+    if(level === "maximum"){
+
+        return {
+            scale: 1.05,
+            quality: 0.48
+        };
+
+    }
+
+
+    if(level === "minimum"){
+
+        return {
+            scale: 1.60,
+            quality: 0.82
+        };
+
+    }
+
+
+    return {
+        scale: 1.30,
+        quality: 0.65
+    };
+
+}
+
+
+/* ================================
+   PDF LOAD
+================================ */
+
+async function loadPdf(file){
+
+    const buffer =
+        await file.arrayBuffer();
+
+    const loadingTask =
+        pdfjsLib.getDocument({
+            data: new Uint8Array(buffer)
+        });
+
+    return await loadingTask.promise;
+
+}
+
+
+/* ================================
+   PDF INFO
 ================================ */
 
 async function readPdfInfo(file){
 
     try{
 
-        const bytes =
-            await file.arrayBuffer();
-
         const pdf =
-            await PDFLib.PDFDocument.load(
-                bytes,
-                {
-                    updateMetadata:false
-                }
-            );
+            await loadPdf(file);
 
-        return pdf.getPageCount();
+        return pdf.numPages;
 
     }catch(error){
+
+        console.error(error);
 
         return null;
 
@@ -1397,7 +1477,9 @@ async function readPdfInfo(file){
 async function selectFile(file){
 
     if(!file){
+
         return;
+
     }
 
 
@@ -1413,12 +1495,14 @@ async function selectFile(file){
         );
 
         return;
+
     }
 
 
     currentFile = file;
 
     clearResult();
+
     hideStatus();
 
 
@@ -1448,10 +1532,14 @@ async function selectFile(file){
     if(pages){
 
         pageCount.textContent =
-            pages + (pages === 1 ? " page" : " pages");
+            pages +
+            (pages === 1 ? " page" : " pages");
+
 
         previewPages.textContent =
-            pages + (pages === 1 ? " page" : " pages");
+            pages +
+            (pages === 1 ? " page" : " pages");
+
 
         compressButton.disabled = false;
 
@@ -1466,10 +1554,12 @@ async function selectFile(file){
         previewPages.textContent =
             "PDF could not be read";
 
+
         compressButton.disabled = true;
 
         compressButton.textContent =
             "PDF cannot be processed";
+
 
         showStatus(
             "This PDF could not be opened. Please try another PDF."
@@ -1528,8 +1618,10 @@ dropZone.addEventListener(
 
         dropZone.classList.remove("drag-over");
 
+
         const file =
             event.dataTransfer.files[0];
+
 
         selectFile(file);
 
@@ -1538,7 +1630,7 @@ dropZone.addEventListener(
 
 
 /* ================================
-   KEYBOARD ACCESS
+   KEYBOARD
 ================================ */
 
 dropZone.addEventListener(
@@ -1561,7 +1653,342 @@ dropZone.addEventListener(
 
 
 /* ================================
-   COMPRESS
+   CANVAS → JPEG
+================================ */
+
+async function renderPageToJpeg(
+    page,
+    scale,
+    quality
+){
+
+    const viewport =
+        page.getViewport({
+            scale:scale
+        });
+
+
+    const canvas =
+        document.createElement("canvas");
+
+
+    const context =
+        canvas.getContext(
+            "2d",
+            {
+                alpha:false
+            }
+        );
+
+
+    canvas.width =
+        Math.ceil(viewport.width);
+
+    canvas.height =
+        Math.ceil(viewport.height);
+
+
+    context.fillStyle =
+        "#ffffff";
+
+    context.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    await page.render({
+
+        canvasContext:context,
+
+        viewport:viewport
+
+    }).promise;
+
+
+    return {
+
+        data:
+            canvas.toDataURL(
+                "image/jpeg",
+                quality
+            ),
+
+        width:
+            viewport.width,
+
+        height:
+            viewport.height
+
+    };
+
+}
+
+
+/* ================================
+   BUILD PDF
+================================ */
+
+async function buildCompressedPdf(
+    file,
+    scale,
+    quality,
+    progressCallback
+){
+
+    const pdf =
+        await loadPdf(file);
+
+
+    let outputPdf = null;
+
+
+    for(
+        let pageNumber = 1;
+        pageNumber <= pdf.numPages;
+        pageNumber++
+    ){
+
+        const page =
+            await pdf.getPage(pageNumber);
+
+
+        const viewport =
+            page.getViewport({
+                scale:scale
+            });
+
+
+        const width =
+            viewport.width;
+
+        const height =
+            viewport.height;
+
+
+        const orientation =
+            width > height
+                ? "landscape"
+                : "portrait";
+
+
+        const pageWidth =
+            width / 1.333333;
+
+
+        const pageHeight =
+            height / 1.333333;
+
+
+        if(!outputPdf){
+
+            outputPdf =
+                new jsPDF({
+
+                    orientation:orientation,
+
+                    unit:"pt",
+
+                    format:[
+                        pageWidth,
+                        pageHeight
+                    ],
+
+                    compress:true
+
+                });
+
+        }else{
+
+            outputPdf.addPage(
+                [
+                    pageWidth,
+                    pageHeight
+                ],
+                orientation
+            );
+
+        }
+
+
+        const image =
+            await renderPageToJpeg(
+                page,
+                scale,
+                quality
+            );
+
+
+        outputPdf.addImage(
+            image.data,
+            "JPEG",
+            0,
+            0,
+            pageWidth,
+            pageHeight,
+            undefined,
+            "FAST"
+        );
+
+
+        if(progressCallback){
+
+            progressCallback(
+                pageNumber,
+                pdf.numPages
+            );
+
+        }
+
+
+        page.cleanup();
+
+    }
+
+
+    const outputBlob =
+        outputPdf.output(
+            "blob"
+        );
+
+
+    return outputBlob;
+
+}
+
+
+/* ================================
+   SMART COMPRESSION
+================================ */
+
+async function compressPdfSmart(
+    file,
+    targetKB,
+    level,
+    progressCallback
+){
+
+    const settings =
+        getCompressionSettings();
+
+
+    /*
+     * First pass.
+     */
+
+    let resultBlob =
+        await buildCompressedPdf(
+            file,
+            settings.scale,
+            settings.quality,
+            progressCallback
+        );
+
+
+    /*
+     * If result is already below target,
+     * return it immediately.
+     */
+
+    if(
+        resultBlob.size <=
+        targetKB * 1024
+    ){
+
+        return resultBlob;
+
+    }
+
+
+    /*
+     * Second pass:
+     * lower image quality.
+     */
+
+    const qualitySteps = [
+
+        0.58,
+        0.50,
+        0.42,
+        0.34
+
+    ];
+
+
+    for(
+        const quality of qualitySteps
+    ){
+
+        resultBlob =
+            await buildCompressedPdf(
+                file,
+                settings.scale,
+                quality,
+                progressCallback
+            );
+
+
+        if(
+            resultBlob.size <=
+            targetKB * 1024
+        ){
+
+            return resultBlob;
+
+        }
+
+    }
+
+
+    /*
+     * Third pass:
+     * lower resolution.
+     */
+
+    const scaleSteps = [
+
+        1.10,
+        0.95,
+        0.82,
+        0.70
+
+    ];
+
+
+    for(
+        const scale of scaleSteps
+    ){
+
+        resultBlob =
+            await buildCompressedPdf(
+                file,
+                scale,
+                0.42,
+                progressCallback
+            );
+
+
+        if(
+            resultBlob.size <=
+            targetKB * 1024
+        ){
+
+            return resultBlob;
+
+        }
+
+    }
+
+
+    return resultBlob;
+
+}
+
+
+/* ================================
+   COMPRESS BUTTON
 ================================ */
 
 compressButton.addEventListener(
@@ -1569,7 +1996,9 @@ compressButton.addEventListener(
     async function(){
 
         if(!currentFile){
+
             return;
+
         }
 
 
@@ -1584,6 +2013,7 @@ compressButton.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -1593,55 +2023,51 @@ compressButton.addEventListener(
         compressButton.disabled = true;
 
         compressButton.textContent =
-            "Compressing PDF...";
+            "Compressing...";
 
 
         showStatus(
-            "Processing your PDF in the browser..."
+            "Preparing PDF..."
         );
 
 
         try{
 
-            const bytes =
-                await currentFile.arrayBuffer();
-
-
-            const pdf =
-                await PDFLib.PDFDocument.load(
-                    bytes,
-                    {
-                        updateMetadata:false
-                    }
-                );
-
-
-            let saveOptions = {
-                useObjectStreams:true,
-                addDefaultPage:false,
-                updateFieldAppearances:false
-            };
-
-
-            if(
-                compressionLevel.value === "minimum"
-            ){
-
-                saveOptions.useObjectStreams = false;
-
-            }
-
-
-            const outputBytes =
-                await pdf.save(saveOptions);
-
-
             const outputBlob =
-                new Blob(
-                    [outputBytes],
-                    {
-                        type:"application/pdf"
+                await compressPdfSmart(
+
+                    currentFile,
+
+                    targetKB,
+
+                    compressionLevel.value,
+
+                    function(
+                        current,
+                        total
+                    ){
+
+                        const percent =
+                            Math.round(
+                                (
+                                    current /
+                                    total
+                                ) * 100
+                            );
+
+
+                        showStatus(
+                            "Compressing page " +
+                            current +
+                            " of " +
+                            total +
+                            " (" +
+                            percent +
+                            "%)"
+                        );
+
                     }
+
                 );
 
 
@@ -1652,24 +2078,30 @@ compressButton.addEventListener(
                 outputBlob.size;
 
 
-            const difference =
-                oldBytes - newBytes;
-
-
             originalSize.textContent =
                 formatBytes(oldBytes);
+
 
             compressedSize.textContent =
                 formatBytes(newBytes);
 
 
+            const difference =
+                oldBytes - newBytes;
+
+
             if(difference > 0){
 
                 const percent =
-                    (difference / oldBytes) * 100;
+                    (
+                        difference /
+                        oldBytes
+                    ) * 100;
+
 
                 reduction.textContent =
-                    percent.toFixed(1) + "% smaller";
+                    percent.toFixed(1) +
+                    "% smaller";
 
             }else if(difference === 0){
 
@@ -1679,20 +2111,29 @@ compressButton.addEventListener(
             }else{
 
                 const percent =
-                    (Math.abs(difference) / oldBytes) * 100;
+                    (
+                        Math.abs(difference) /
+                        oldBytes
+                    ) * 100;
+
 
                 reduction.textContent =
-                    percent.toFixed(1) + "% larger";
+                    percent.toFixed(1) +
+                    "% larger";
 
             }
 
 
             resultTarget.textContent =
-                formatBytes(targetKB * 1024);
+                formatBytes(
+                    targetKB * 1024
+                );
 
 
             outputUrl =
-                URL.createObjectURL(outputBlob);
+                URL.createObjectURL(
+                    outputBlob
+                );
 
 
             downloadButton.href =
@@ -1703,28 +2144,36 @@ compressButton.addEventListener(
                 currentFile.name.replace(
                     /\.pdf$/i,
                     ""
-                ) + "-compressed.pdf";
+                ) +
+                "-compressed.pdf";
 
 
-            result.classList.add("visible");
+            result.classList.add(
+                "visible"
+            );
 
 
-            if(newBytes <= targetKB * 1024){
+            if(
+                newBytes <=
+                targetKB * 1024
+            ){
 
                 showStatus(
-                    "Done. The selected target size was achieved."
+                    "Done. Target size achieved."
                 );
 
-            }else if(newBytes < oldBytes){
+            }else if(
+                newBytes < oldBytes
+            ){
 
                 showStatus(
-                    "Done. The PDF was reduced, but the selected target size could not be reached."
+                    "Done. PDF compressed to the smallest practical size reached by this browser."
                 );
 
             }else{
 
                 showStatus(
-                    "Done. This PDF could not be reduced further with browser-side optimization."
+                    "This PDF could not be reduced further."
                 );
 
             }
@@ -1732,10 +2181,14 @@ compressButton.addEventListener(
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "PDF compression error:",
+                error
+            );
+
 
             showStatus(
-                "Unable to process this PDF. Please try another PDF."
+                "Unable to compress this PDF. Please try another PDF or a smaller file."
             );
 
         }
@@ -1749,7 +2202,10 @@ compressButton.addEventListener(
     }
 );
 
-</script>
+     </script>
+    
+
+
 
 
 <!-- FAQ STRUCTURED DATA -->
