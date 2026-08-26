@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Compress PDF Online Free - Reduce PDF Size | ToolTon</title>
+
+    <meta name="description"
+          content="Compress PDF files online for free with ToolTon. Reduce PDF size directly in your browser without uploading your files. Fast, private and mobile friendly.">
+
+    <meta name="keywords"
+          content="compress pdf, compress pdf online, reduce pdf size, pdf compressor, compress pdf free, reduce pdf file size">
+
+    <link rel="canonical"
+          href="https://toolton.github.io/tools/compress-pdf/">
+
+    <meta property="og:title"
+          content="Compress PDF Online Free - ToolTon">
+
+    <meta property="og:description"
+          content="Reduce PDF file size online for free. Your PDF stays in your browser.">
+
+    <meta property="og:type"
+          content="website">
+
+    <meta property="og:url"
+          content="https://toolton.github.io/tools/compress-pdf/">
+
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <link rel="stylesheet"
+          href="/assets/css/style.css">
+
+    <!-- PDF-LIB -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+    <style>
+        .tool-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed var(--border);
+            border-radius: 14px;
+            padding: 40px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .upload-box:hover {
+            background: var(--surface-hover);
+        }
+
+        .upload-box input {
+            display: none;
+        }
+
+        .upload-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .file-info {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .file-name {
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .file-size {
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        .compress-btn,
+        .download-btn {
+            display: none;
+            margin: 20px auto 0;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 10px;
+            background: var(--accent);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .compress-btn:hover,
+        .download-btn:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg);
+        }
+
+        .result-row {
+            margin: 7px 0;
+        }
+
+        .status {
+            margin-top: 15px;
+            color: var(--muted);
+        }
+
+        .info-section {
+            margin-top: 50px;
+        }
+
+        .info-section h2 {
+            margin-bottom: 12px;
+        }
+
+        .faq {
+            margin-top: 25px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+        }
+
+        .faq-item h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        @media (max-width: 600px) {
+            .tool-container {
+                margin: 20px auto;
+                padding: 12px;
+            }
+
+            .tool-card {
+                padding: 20px 15px;
+            }
+
+            .upload-box {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <a href="/" class="logo">ToolTon</a>
+    </div>
+</header>
+
+<main>
+
+    <div class="tool-container">
+
+        <div class="tool-card">
+
+            <h1>Compress PDF Online</h1>
+
+            <p class="muted">
+                Reduce PDF file size for free.
+                Fast, simple and browser-based.
+            </p>
+
+            <label class="upload-box" for="pdfInput">
+
+                <div class="upload-title">
+                    Select PDF File
+                </div>
+
+                <div class="muted">
+                    Tap here to choose a PDF from your device
+                </div>
+
+                <input
+                    type="file"
+                    id="pdfInput"
+                    accept="application/pdf">
+            </label>
+
+            <div class="file-info" id="fileInfo">
+
+                <div class="file-name" id="fileName"></div>
+
+                <div class="file-size" id="fileSize"></div>
+
+            </div>
+
+            <button
+                class="compress-btn"
+                id="compressBtn">
+                Compress PDF
+            </button>
+
+            <div class="status" id="status"></div>
+
+            <div class="result" id="result">
+
+                <h2>Compression Result</h2>
+
+                <div class="result-row">
+                    Original size:
+                    <strong id="originalSize"></strong>
+                </div>
+
+                <div class="result-row">
+                    New size:
+                    <strong id="newSize"></strong>
+                </div>
+
+                <div class="result-row">
+                    Size change:
+                    <strong id="savedSize"></strong>
+                </div>
+
+                <button
+                    class="download-btn"
+                    id="downloadBtn">
+                    Download Compressed PDF
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <section class="info-section">
+
+            <h2>Free PDF Compressor</h2>
+
+            <p>
+                ToolTon PDF Compressor helps you reduce the size
+                of PDF files directly in your browser.
+                No account or software installation is required.
+            </p>
+
+            <p>
+                It can be useful when a website has a PDF upload
+                size limit for applications, forms, documents,
+                assignments or other online submissions.
+            </p>
+
+            <h2>How to Compress a PDF</h2>
+
+            <ol>
+                <li>Select your PDF file.</li>
+                <li>Tap the Compress PDF button.</li>
+                <li>Wait while the PDF is processed.</li>
+                <li>Download the resulting PDF.</li>
+            </ol>
+
+            <h2>Is my PDF uploaded?</h2>
+
+            <p>
+                No. Processing is performed inside your browser.
+                ToolTon does not need to upload your PDF to a
+                server for this tool.
+            </p>
+
+            <div class="faq">
+
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>How can I compress a PDF online for free?</h3>
+                    <p>
+                        Select your PDF in ToolTon's PDF compressor
+                        and tap Compress PDF. The processed file can
+                        then be downloaded directly to your device.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Can I compress PDF on my phone?</h3>
+                    <p>
+                        Yes. ToolTon is designed to work on phones,
+                        tablets and desktop browsers.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Do I need to install software?</h3>
+                    <p>
+                        No. The tool runs in a modern web browser.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Is the PDF private?</h3>
+                    <p>
+                        The PDF is processed locally in your browser,
+                        so the tool does not require uploading the
+                        document to a server.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Will every PDF become smaller?</h3>
+                    <p>
+                        Not necessarily. Some PDFs are already highly
+                        optimized, so their size may change very little
+                        or may occasionally remain similar after
+                        processing.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script>
+    const pdfInput = document.getElementById("pdfInput");
+    const fileInfo = document.getElementById("fileInfo");
+    const fileName = document.getElementById("fileName");
+    const fileSize = document.getElementById("fileSize");
+    const compressBtn = document.getElementById("compressBtn");
+    const status = document.getElementById("status");
+
+    const result = document.getElementById("result");
+    const originalSize = document.getElementById("originalSize");
+    const newSize = document.getElementById("newSize");
+    const savedSize = document.getElementById("savedSize");
+
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    let selectedFile = null;
+    let compressedBlob = null;
+
+
+    function formatBytes(bytes) {
+
+        if (bytes < 1024) {
+            return bytes + " B";
+        }
+
+        if (bytes < 1024 * 1024) {
+            return (bytes / 1024).toFixed(1) + " KB";
+        }
+
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+    }
+
+
+    pdfInput.addEventListener("change", function () {
+
+        selectedFile = this.files[0];
+
+        if (!selectedFile) {
+            return;
+        }
+
+        if (selectedFile.type !== "application/pdf") {
+
+            status.textContent = "Please select a PDF file.";
+
+            fileInfo.style.display = "none";
+            compressBtn.style.display = "none";
+
+            return;
+        }
+
+        fileName.textContent = selectedFile.name;
+
+        fileSize.textContent =
+            "Original size: " +
+            formatBytes(selectedFile.size);
+
+        fileInfo.style.display = "block";
+
+        compressBtn.style.display = "inline-block";
+
+        result.style.display = "none";
+
+        downloadBtn.style.display = "none";
+
+        status.textContent = "";
+    });
+
+
+    compressBtn.addEventListener("click", async function () {
+
+        if (!selectedFile) {
+            return;
+        }
+
+        compressBtn.disabled = true;
+
+        status.textContent = "Compressing PDF...";
+
+        result.style.display = "none";
+
+        try {
+
+            const arrayBuffer =
+                await selectedFile.arrayBuffer();
+
+            const pdfDoc =
+                await PDFLib.PDFDocument.load(arrayBuffer);
+
+            const compressedBytes =
+                await pdfDoc.save({
+                    useObjectStreams: true,
+                    addDefaultPage: false
+                });
+
+            compressedBlob =
+                new Blob(
+                    [compressedBytes],
+                    { type: "application/pdf" }
+                );
+
+            const oldSize = selectedFile.size;
+
+            const newFileSize = compressedBlob.size;
+
+            const difference =
+                oldSize - newFileSize;
+
+            originalSize.textContent =
+                formatBytes(oldSize);
+
+            newSize.textContent =
+                formatBytes(newFileSize);
+
+            if (difference > 0) {
+
+                const percentage =
+                    ((difference / oldSize) * 100).toFixed(1);
+
+                savedSize.textContent =
+                    formatBytes(difference) +
+                    " smaller (" +
+                    percentage +
+                    "%)";
+
+            } else if (difference === 0) {
+
+                savedSize.textContent =
+                    "No size change";
+
+            } else {
+
+                savedSize.textContent =
+                    formatBytes(Math.abs(difference)) +
+                    " larger";
+
+            }
+
+            result.style.display = "block";
+
+            downloadBtn.style.display = "inline-block";
+
+            status.textContent =
+                "PDF processing completed.";
+
+        } catch (error) {
+
+            console.error(error);
+
+            status.textContent =
+                "Unable to process this PDF. Please try another PDF file.";
+
+        }
+
+        compressBtn.disabled = false;
+    });
+
+
+    downloadBtn.addEventListener("click", function () {
+
+        if (!compressedBlob) {
+            return;
+        }
+
+        const url =
+            URL.createObjectURL(compressedBlob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        link.download =
+            selectedFile.name.replace(
+                /\.pdf$/i,
+                ""
+            ) + "-compressed.pdf";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+        URL.revokeObjectURL(url);
+    });
+</script>
+
+</body>
+</html>
