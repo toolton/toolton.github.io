@@ -1,91 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Free Image Resizer Online — Resize JPG, PNG & WebP | Toolton</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Image Resizer Online - Resize Images Free | Toolton</title>
 
     <meta name="description"
-          content="Resize images and photos online for free. Change JPG, PNG and WebP dimensions, resize by percentage, lock aspect ratio and download resized images directly in your browser.">
+          content="Resize JPG, PNG and WebP images online for free. Set exact width and height in pixels, CM or inches. Create passport photos, signatures and custom sizes without login.">
 
-    <meta name="robots" content="index, follow">
+    <meta name="keywords"
+          content="image resizer, resize image online, photo resizer, passport photo resizer, image resize in cm, image resize in inches, image resize in pixels, free image resizer">
+
+    <meta name="robots"
+          content="index, follow">
 
     <link rel="canonical"
           href="https://toolton.github.io/tools/image-resizer/">
 
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-    <meta property="og:type" content="website">
     <meta property="og:title"
-          content="Free Image Resizer Online — Resize JPG, PNG & WebP">
+          content="Free Image Resizer Online - Toolton">
+
     <meta property="og:description"
-          content="Resize images and photos online for free. Change image dimensions, keep aspect ratio and download resized images.">
+          content="Resize images to exact dimensions in pixels, CM or inches. Free, fast and privacy-focused.">
+
     <meta property="og:url"
           content="https://toolton.github.io/tools/image-resizer/">
-    <meta property="og:site_name" content="Toolton">
 
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <meta property="og:type"
+          content="website">
+
+    <link rel="stylesheet"
+          href="../../../assets/css/style.css">
+
 
     <style>
+
+        /* =====================================
+           IMAGE RESIZER PAGE
+        ====================================== */
+
         .resizer-page {
-            padding: 55px 0 90px;
+            padding: 40px 0 70px;
         }
 
-        .resizer-page > .container {
-            width: min(1100px, calc(100% - 32px));
+        .resizer-container {
+            width: min(1000px, calc(100% - 24px));
             margin: auto;
         }
 
-        .breadcrumb {
-            display: flex;
-            gap: 7px;
-            align-items: center;
-            margin-bottom: 32px;
-            color: #777;
-            font-size: .85rem;
+
+        /* =====================================
+           TOOL HEADING
+        ====================================== */
+
+        .tool-heading {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .breadcrumb a {
-            color: #333;
-            text-decoration: underline;
-            text-underline-offset: 3px;
+        .tool-heading h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            line-height: 1.1;
+            margin: 10px 0;
         }
 
-        .tool-intro {
-            max-width: 780px;
-            margin-bottom: 38px;
-        }
-
-        .tool-intro h1 {
-            margin: 10px 0 17px;
-            font-size: clamp(2.5rem, 7vw, 4.8rem);
-            line-height: .98;
-            letter-spacing: -.06em;
-        }
-
-        .tool-intro p {
-            max-width: 700px;
+        .tool-heading p {
+            max-width: 720px;
+            margin: auto;
             color: #666;
-            font-size: 1.05rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
-        .resizer-app {
-            max-width: 900px;
-            margin: auto;
-            overflow: hidden;
-            border: 1px solid #e1e1e1;
-            border-radius: 24px;
-            background: #fff;
-            box-shadow: 0 12px 45px rgba(0,0,0,.06);
+        .tool-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .08em;
         }
+
+
+        /* =====================================
+           TOOL CARD
+        ====================================== */
+
+        .resizer-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0,0,0,.06);
+        }
+
+
+        /* =====================================
+           UPLOAD AREA
+        ====================================== */
 
         .upload-area {
-            margin: 28px;
+            margin: 24px;
             padding: 45px 20px;
             border: 2px dashed #d5d5d5;
-            border-radius: 18px;
+            border-radius: 16px;
             text-align: center;
             cursor: pointer;
             transition: .2s ease;
@@ -93,330 +112,446 @@
 
         .upload-area:hover,
         .upload-area.dragover {
-            border-color: #111;
             background: #fafafa;
+            border-color: #111;
         }
 
         .upload-icon {
-            font-size: 2rem;
-            font-weight: 900;
+            font-size: 30px;
+            font-weight: 800;
             margin-bottom: 10px;
         }
 
         .upload-area h2 {
-            margin-bottom: 8px;
+            margin: 0 0 8px;
             font-size: 1.2rem;
         }
 
         .upload-area p {
+            margin: 0;
             color: #777;
-            font-size: .85rem;
+            font-size: .9rem;
         }
 
         #fileInput {
             display: none;
         }
 
+
+        /* =====================================
+           EDITOR
+        ====================================== */
+
         .editor {
             display: none;
-            padding: 28px;
-            border-top: 1px solid #e7e7e7;
+            padding: 24px;
+            border-top: 1px solid #e5e5e5;
         }
 
-        .editor.visible {
+        .editor.active {
             display: block;
         }
+
+
+        /* =====================================
+           IMAGE INFORMATION
+        ====================================== */
 
         .image-info {
             display: flex;
             justify-content: space-between;
             gap: 15px;
-            margin-bottom: 22px;
-            padding: 15px;
-            border-radius: 12px;
+            flex-wrap: wrap;
+
+            padding: 14px;
+
             background: #f7f7f7;
-            color: #555;
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
             font-size: .82rem;
+            color: #555;
         }
 
-        .controls {
+
+        /* =====================================
+           CONTROLS
+        ====================================== */
+
+        .controls-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 14px;
         }
 
-        .control {
+        .control-box {
             padding: 15px;
-            border: 1px solid #e5e5e5;
-            border-radius: 13px;
+
             background: #fafafa;
+
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
         }
 
-        .control.full {
+        .control-box.full {
             grid-column: 1 / -1;
         }
 
-        .control label {
+        .control-box label {
             display: block;
+
             margin-bottom: 8px;
-            color: #555;
-            font-size: .78rem;
-            font-weight: 800;
+
+            font-size: .8rem;
+            font-weight: 700;
         }
 
-        .control input,
-        .control select {
+        .control-box input,
+        .control-box select {
+
             width: 100%;
-            height: 45px;
-            padding: 0 11px;
-            border: 1px solid #d8d8d8;
+            height: 44px;
+
+            padding: 0 10px;
+
+            border: 1px solid #d5d5d5;
             border-radius: 9px;
+
             background: #fff;
-            color: #111;
+
             font: inherit;
-            outline: none;
+
+            box-sizing: border-box;
         }
 
-        .control input:focus,
-        .control select:focus {
-            border-color: #999;
+
+        /* =====================================
+           DIMENSIONS
+        ====================================== */
+
+        .dimension-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
         }
 
-        .lock-row {
+        .dimension-grid small {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #777;
+
+            font-size: .75rem;
+        }
+
+        .ratio-row {
+
             display: flex;
+
             align-items: center;
-            gap: 9px;
+
+            gap: 8px;
+
             margin-top: 12px;
-            color: #555;
+
             font-size: .82rem;
+
+            color: #555;
         }
 
-        .lock-row input {
+        .ratio-row input {
+
             width: auto;
+
             height: auto;
         }
 
-        .preview {
-            margin-top: 25px;
-            padding: 20px;
-            border: 1px solid #e5e5e5;
-            border-radius: 15px;
-            text-align: center;
-            background: #fafafa;
+
+        /* =====================================
+           TARGET FILE SIZE
+        ====================================== */
+
+        .target-row {
+
+            display: flex;
+
+            gap: 10px;
         }
 
-        .preview img {
+        .target-row input {
+
+            flex: 1;
+        }
+
+        .target-row select {
+
+            width: 100px;
+        }
+
+
+        /* =====================================
+           PREVIEW
+        ====================================== */
+
+        .preview-box {
+
+            margin-top: 22px;
+
+            padding: 20px;
+
+            border: 1px solid #e5e5e5;
+
+            border-radius: 14px;
+
+            background: #fafafa;
+
+            text-align: center;
+        }
+
+        .preview-box img {
+
             display: block;
+
             max-width: 100%;
+
             max-height: 360px;
+
             margin: auto;
+
             object-fit: contain;
         }
 
-        .button-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 18px;
+        .output-info {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 18px;
+
+            margin-top: 14px;
+
+            color: #666;
+
+            font-size: .8rem;
         }
 
-        .primary-button,
-        .secondary-button {
+
+        /* =====================================
+           BUTTONS
+        ====================================== */
+
+        .button-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 16px;
+        }
+
+        .tool-button {
+
             min-height: 50px;
+
             border-radius: 10px;
+
             font: inherit;
+
             font-weight: 800;
+
             cursor: pointer;
         }
 
         .primary-button {
+
             border: 0;
+
             background: #111;
+
             color: #fff;
         }
 
         .secondary-button {
-            border: 1px solid #d8d8d8;
+
+            border: 1px solid #d5d5d5;
+
             background: #fff;
+
             color: #111;
         }
 
-        .primary-button:hover,
-        .secondary-button:hover {
-            transform: translateY(-1px);
+        .tool-button:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
         }
+
+
+        /* =====================================
+           STATUS
+        ====================================== */
 
         .status {
+
             min-height: 20px;
-            margin-top: 12px;
-            color: #777;
-            font-size: .8rem;
+
+            margin-top: 10px;
+
             text-align: center;
+
+            font-size: .8rem;
+
+            color: #666;
         }
 
+
+        /* =====================================
+           PRIVACY
+        ====================================== */
+
         .privacy-note {
-            margin: 20px;
-            padding: 16px;
+
+            margin: 20px 24px 24px;
+
+            padding: 15px;
+
             border-radius: 12px;
+
             background: #f7f7f7;
+
             color: #666;
+
             font-size: .82rem;
-            line-height: 1.6;
+
+            line-height: 1.5;
         }
 
         .privacy-note strong {
+
             color: #222;
         }
 
-        .tool-information {
+
+        /* =====================================
+           SEO CONTENT
+        ====================================== */
+
+        .tool-content {
+
             max-width: 900px;
-            margin: 65px auto 0;
+
+            margin: 55px auto 0;
         }
 
-        .tool-information h2 {
-            margin-bottom: 14px;
+        .tool-content h2 {
+
             font-size: 2rem;
-            letter-spacing: -.04em;
+
+            margin-bottom: 12px;
         }
 
-        .tool-information h3 {
-            margin: 30px 0 9px;
-            font-size: 1.15rem;
+        .tool-content h3 {
+
+            margin-top: 28px;
         }
 
-        .tool-information p {
-            margin-bottom: 16px;
+        .tool-content p {
+
             color: #666;
-            line-height: 1.75;
+
+            line-height: 1.7;
         }
 
-        .use-cases {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin: 20px 0 35px;
-        }
 
-        .use-case {
-            padding: 18px;
-            border: 1px solid #e5e5e5;
-            border-radius: 14px;
-            background: #fafafa;
-        }
-
-        .use-case h3 {
-            margin: 0 0 7px;
-            font-size: 1rem;
-        }
-
-        .use-case p {
-            margin: 0;
-            font-size: .9rem;
-        }
-
-        .faq {
-            margin-top: 50px;
-        }
-
-        .faq-item {
-            padding: 20px 0;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .faq-item h3 {
-            margin: 0 0 9px;
-            font-size: 1rem;
-        }
-
-        .faq-item p {
-            margin: 0;
-        }
-
-        .related-tools {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #e5e5e5;
-        }
-
-        .related-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .related-links a {
-            display: inline-flex;
-            padding: 10px 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            color: #222;
-            text-decoration: none;
-            background: #fff;
-            font-size: .9rem;
-            font-weight: 700;
-        }
-
-        .related-links a:hover {
-            background: #f7f7f7;
-        }
+        /* =====================================
+           MOBILE RESPONSIVE
+        ====================================== */
 
         @media (max-width: 700px) {
 
-            .resizer-page {
-                padding-top: 35px;
-            }
+            .controls-grid {
 
-            .resizer-page > .container {
-                width: calc(100% - 24px);
-            }
-
-            .upload-area {
-                margin: 18px;
-            }
-
-            .editor {
-                padding: 18px;
-            }
-
-            .controls {
                 grid-template-columns: 1fr;
             }
 
-            .control.full {
+            .control-box.full {
+
                 grid-column: auto;
             }
 
-            .button-row {
+            .dimension-grid {
+
                 grid-template-columns: 1fr;
+            }
+
+            .button-row {
+
+                grid-template-columns: 1fr;
+            }
+
+            .target-row {
+
+                align-items: stretch;
+            }
+
+            .target-row select {
+
+                width: 95px;
             }
 
             .image-info {
+
                 flex-direction: column;
             }
 
-            .use-cases {
-                grid-template-columns: 1fr;
-            }
         }
+
     </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================
+     HEADER
+====================================== -->
 
 <header class="site-header">
 
     <div class="container header-inner">
 
         <a href="../../../"
-           class="logo"
-           aria-label="Toolton Home">
+           class="logo">
+
             Toolton
+
         </a>
 
-        <nav class="navigation" aria-label="Main navigation">
-            <a href="../../../#tools">Tools</a>
-            <a href="../../../#categories">Categories</a>
+
+        <nav class="navigation">
+
+            <a href="../../../#tools">
+                Tools
+            </a>
+
+            <a href="../../../#categories">
+                Categories
+            </a>
+
         </nav>
 
     </div>
@@ -424,548 +559,870 @@
 </header>
 
 
+
+<!-- =====================================
+     MAIN CONTENT
+====================================== -->
+
 <main class="resizer-page">
 
-    <div class="container">
-
-        <div class="breadcrumb">
-            <a href="../../../">Toolton</a>
-            <span>›</span>
-            <span>Image Resizer</span>
-        </div>
+    <div class="resizer-container">
 
 
-        <div class="tool-intro">
+        <!-- =================================
+             TOOL INTRODUCTION
+        ================================== -->
 
-            <span class="section-label">FREE IMAGE TOOL</span>
+        <section class="tool-heading">
 
-            <h1>Free Image Resizer Online</h1>
+            <span class="tool-badge">
+                FREE ONLINE TOOL
+            </span>
+
+            <h1>
+                Image Resizer
+            </h1>
 
             <p>
-                Resize images and photos online for free.
-                Change the width and height of JPG, PNG and WebP images,
-                resize by percentage, keep the aspect ratio locked,
-                choose an output format and download your resized image instantly.
+                Resize JPG, PNG and WebP images to exact
+                dimensions. Choose pixels, centimetres or
+                inches, use ready-made presets, control
+                quality and reduce file size directly in
+                your browser.
             </p>
-
-        </div>
-
-
-        <section class="resizer-app"
-                 aria-label="Free Image Resizer">
-
-            <label class="upload-area"
-                   id="uploadArea"
-                   for="fileInput">
-
-                <div class="upload-icon">IMG</div>
-
-                <h2>Choose an image</h2>
-
-                <p>
-                    Click to upload or drag and drop
-                    JPG, PNG or WebP
-                </p>
-
-                <input
-                    type="file"
-                    id="fileInput"
-                    accept="image/jpeg,image/png,image/webp"
-                >
-
-            </label>
-
-
-            <div class="editor" id="editor">
-
-                <div class="image-info">
-
-                    <span id="originalInfo">
-                        Original: —
-                    </span>
-
-                    <span id="fileInfo">
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="controls">
-
-                    <div class="control">
-
-                        <label for="widthInput">
-                            Width (px)
-                        </label>
-
-                        <input
-                            type="number"
-                            id="widthInput"
-                            min="1"
-                            max="10000"
-                        >
-
-                    </div>
-
-
-                    <div class="control">
-
-                        <label for="heightInput">
-                            Height (px)
-                        </label>
-
-                        <input
-                            type="number"
-                            id="heightInput"
-                            min="1"
-                            max="10000"
-                        >
-
-                    </div>
-
-
-                    <div class="control full">
-
-                        <label for="percentageInput">
-                            Quick resize percentage
-                        </label>
-
-                        <select id="percentageInput">
-
-                            <option value="custom">
-                                Custom dimensions
-                            </option>
-
-                            <option value="25">25%</option>
-                            <option value="50">50%</option>
-                            <option value="75">75%</option>
-                            <option value="100">100%</option>
-                            <option value="125">125%</option>
-                            <option value="150">150%</option>
-                            <option value="200">200%</option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="control">
-
-                        <label for="formatInput">
-                            Output format
-                        </label>
-
-                        <select id="formatInput">
-
-                            <option value="image/jpeg">
-                                JPG
-                            </option>
-
-                            <option value="image/png">
-                                PNG
-                            </option>
-
-                            <option value="image/webp">
-                                WebP
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="control">
-
-                        <label for="qualityInput">
-                            Quality:
-                            <span id="qualityValue">90</span>%
-                        </label>
-
-                        <input
-                            type="range"
-                            id="qualityInput"
-                            min="10"
-                            max="100"
-                            value="90"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <label class="lock-row">
-
-                    <input
-                        type="checkbox"
-                        id="lockRatio"
-                        checked
-                    >
-
-                    Lock aspect ratio
-
-                </label>
-
-
-                <div class="preview">
-
-                    <img
-                        id="previewImage"
-                        alt="Resized image preview"
-                    >
-
-                </div>
-
-
-                <div class="button-row">
-
-                    <button
-                        type="button"
-                        class="primary-button"
-                        id="resizeButton"
-                    >
-                        Resize Image
-                    </button>
-
-                    <button
-                        type="button"
-                        class="secondary-button"
-                        id="resetButton"
-                    >
-                        Choose Another
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="status"
-                    id="status"
-                    aria-live="polite">
-                </div>
-
-            </div>
-
-
-            <div class="privacy-note">
-
-                <strong>Privacy:</strong>
-                Your image is processed directly in your browser.
-                It is not uploaded to a server.
-
-            </div>
 
         </section>
 
 
-        <section class="tool-information">
 
-            <h2>Free Image Resizer Online</h2>
+        <!-- =====================================
+             MAIN TOOL
+        ====================================== -->
 
-            <p>
-                Toolton's Image Resizer lets you resize images and
-                photos online without installing software.
-                Change exact pixel dimensions, resize by percentage,
-                keep the original aspect ratio and choose JPG, PNG
-                or WebP as the output format.
-            </p>
+        <section class="resizer-card">
 
 
-            <h3>How to resize an image</h3>
+            <!-- =================================
+                 PART 2
+                 UPLOAD + DIMENSIONS + PRESETS
+            ================================== -->
 
-            <p>
-                Upload a JPG, PNG or WebP image. Enter the desired
-                width and height, or choose a resize percentage.
-                Keep <strong>Lock aspect ratio</strong> enabled when
-                you want the image proportions to remain unchanged.
-                Then select <strong>Resize Image</strong> and download
-                the result.
-            </p>
 
+            <!-- =====================================
+     PART 2 — UPLOAD + DIMENSIONS + PRESETS
+====================================== -->
 
-            <h3>Resize JPG, PNG and WebP images</h3>
+<div class="upload-area"
+     id="uploadArea">
 
-            <p>
-                You can resize common image formats including JPG,
-                PNG and WebP. Choose the output format you want
-                before downloading the resized image.
-            </p>
+    <div class="upload-icon">
+        IMG
+    </div>
 
+    <h2>
+        Choose an image
+    </h2>
 
-            <h3>Resize an image to specific dimensions</h3>
+    <p>
+        Click to upload or drag & drop JPG, PNG or WebP
+    </p>
 
-            <p>
-                Enter the exact width and height in pixels when you
-                need a specific image size. With aspect ratio lock
-                enabled, changing one dimension automatically
-                calculates the matching dimension.
-            </p>
-
-
-            <h3>Resize an image by percentage</h3>
-
-            <p>
-                Quickly resize an image to 25%, 50%, 75%, 100%,
-                125%, 150% or 200% of its original dimensions.
-                This is useful when you need a quick smaller or
-                larger version of a photo.
-            </p>
-
-
-            <h3>Resize photos for websites and online use</h3>
-
-            <p>
-                Resizing a large photo can make it easier to use
-                on websites, forms, documents and online platforms.
-                Choose dimensions that match the space where the
-                image will be used.
-            </p>
-
-
-            <div class="use-cases">
-
-                <div class="use-case">
-
-                    <h3>Website images</h3>
-
-                    <p>
-                        Resize large images to dimensions suitable
-                        for websites and online pages.
-                    </p>
-
-                </div>
-
-
-                <div class="use-case">
-
-                    <h3>Social media images</h3>
-
-                    <p>
-                        Change image dimensions before uploading
-                        photos to social platforms.
-                    </p>
-
-                </div>
-
-
-                <div class="use-case">
-
-                    <h3>Forms and documents</h3>
-
-                    <p>
-                        Create a smaller image when a website,
-                        application or document requires specific
-                        dimensions.
-                    </p>
-
-                </div>
-
-
-                <div class="use-case">
-
-                    <h3>Quick photo resizing</h3>
-
-                    <p>
-                        Resize a photo by pixels or percentage
-                        without installing an image editing app.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <h3>Does resizing upload my image?</h3>
-
-            <p>
-                No. Image resizing is performed directly in your
-                browser. Your selected image is not uploaded to
-                a Toolton server.
-            </p>
-
-
-        <section class="faq">
-
-            <h2>Image Resizer FAQs</h2>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    How do I resize an image online?
-                </h3>
-
-                <p>
-                    Upload your image, enter the desired width
-                    and height or choose a percentage, then select
-                    Resize Image. You can download the resized
-                    image immediately.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Can I resize a JPG image?
-                </h3>
-
-                <p>
-                    Yes. JPG images are supported. You can change
-                    their dimensions and choose the output format
-                    before downloading.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Can I resize a PNG image?
-                </h3>
-
-                <p>
-                    Yes. PNG images can be uploaded and resized
-                    directly in the browser.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Can I resize a WebP image?
-                </h3>
-
-                <p>
-                    Yes. WebP images are supported along with
-                    JPG and PNG.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    How do I resize an image without changing
-                    its proportions?
-                </h3>
-
-                <p>
-                    Keep <strong>Lock aspect ratio</strong>
-                    enabled. When you change the width or height,
-                    the other dimension is automatically calculated
-                    from the original image proportions.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Can I resize an image to a specific size?
-                </h3>
-
-                <p>
-                    Yes. Enter the required width and height
-                    in pixels. The tool supports dimensions
-                    up to 10,000 pixels.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Can I resize an image by percentage?
-                </h3>
-
-                <p>
-                    Yes. You can quickly choose 25%, 50%, 75%,
-                    100%, 125%, 150% or 200%.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Is this Image Resizer free?
-                </h3>
-
-                <p>
-                    Yes. Toolton's Image Resizer is free to use
-                    and does not require an account.
-                </p>
-
-            </div>
-
-
-            <div class="faq-item">
-
-                <h3>
-                    Are my images stored or uploaded?
-                </h3>
-
-                <p>
-                    No. The image is processed directly in your
-                    browser and is not uploaded to a Toolton server.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <section class="related-tools">
-
-            <h2>More Free Toolton Tools</h2>
-
-            <p>
-                Need to work with an image before or after resizing?
-                Try these other free Toolton tools.
-            </p>
-
-            <div class="related-links">
-
-                <a href="../../../tools/image-compressor/">
-                    Image Compressor
-                </a>
-
-                <a href="../../../tools/qr-code-generator/">
-                    QR Code Generator
-                </a>
-
-                <a href="../../../">
-                    All Toolton Tools
-                </a>
-
-            </div>
-
-        </section>
-
-    </section>
+    <input
+        type="file"
+        id="fileInput"
+        accept="image/jpeg,image/png,image/webp"
+    >
 
 </div>
 
+
+<div class="editor" id="editor">
+
+
+    <!-- ORIGINAL IMAGE INFORMATION -->
+
+    <div class="image-info">
+
+        <span id="originalInfo">
+            Original: —
+        </span>
+
+        <span id="fileInfo">
+            File size: —
+        </span>
+
+    </div>
+
+
+
+    <div class="controls-grid">
+
+
+        <!-- ================================
+             SIZE PRESETS
+        ================================= -->
+
+        <div class="control-box full">
+
+            <label for="presetInput">
+                Quick Size Preset
+            </label>
+
+            <select id="presetInput">
+
+                <option value="custom">
+                    Custom Dimensions
+                </option>
+
+                <option value="passport35x45">
+                    Passport Photo — 35 × 45 mm
+                </option>
+
+                <option value="passport2x2">
+                    Passport Photo — 2 × 2 inch
+                </option>
+
+                <option value="signature">
+                    Signature — 40 × 20 mm
+                </option>
+
+                <option value="square">
+                    Square Photo — 1 × 1 inch
+                </option>
+
+                <option value="a4">
+                    A4 — 210 × 297 mm
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ================================
+             WIDTH + HEIGHT
+        ================================= -->
+
+        <div class="control-box full">
+
+            <label>
+                Exact Dimensions
+            </label>
+
+
+            <div class="dimension-grid">
+
+
+                <div>
+
+                    <input
+                        type="number"
+                        id="widthInput"
+                        min="1"
+                        max="10000"
+                        step="1"
+                        placeholder="Width"
+                    >
+
+                    <small>
+                        Width
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <input
+                        type="number"
+                        id="heightInput"
+                        min="1"
+                        max="10000"
+                        step="1"
+                        placeholder="Height"
+                    >
+
+                    <small>
+                        Height
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ASPECT RATIO -->
+
+            <label class="ratio-row">
+
+                <input
+                    type="checkbox"
+                    id="lockRatio"
+                    checked
+                >
+
+                <span>
+                    Lock aspect ratio
+                </span>
+
+            </label>
+
+        </div>
+
+
+
+        <!-- ================================
+             UNIT
+        ================================= -->
+
+        <div class="control-box">
+
+            <label for="unitInput">
+                Measurement Unit
+            </label>
+
+            <select id="unitInput">
+
+                <option value="px">
+                    Pixels (px)
+                </option>
+
+                <option value="cm">
+                    Centimetres (cm)
+                </option>
+
+                <option value="in">
+                    Inches (in)
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ================================
+             DPI
+        ================================= -->
+
+        <div class="control-box">
+
+            <label for="dpiInput">
+                Resolution (DPI)
+            </label>
+
+            <input
+                type="number"
+                id="dpiInput"
+                value="300"
+                min="72"
+                max="600"
+                step="1"
+            >
+
+        </div>
+
+
+
+        <!-- ================================
+             DIMENSION HELP
+        ================================= -->
+
+        <div class="control-box full">
+
+            <small style="
+                display:block;
+                color:#777;
+                line-height:1.6;
+            ">
+
+                <strong>Tip:</strong>
+                For printing or official forms, you can
+                enter dimensions in CM or inches and choose
+                the required DPI. Turn off
+                <strong>Lock aspect ratio</strong> when you
+                need an exact width and height, such as a
+                passport photo or signature.
+
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+            <!-- =================================
+                 PART 3
+                 QUALITY + TARGET SIZE + PREVIEW
+            ================================== -->
+
+
+            <!-- =====================================
+     PART 3 — OUTPUT + COMPRESSION + PREVIEW
+====================================== -->
+
+<div class="controls-grid">
+
+
+    <!-- ================================
+         QUICK RESIZE
+    ================================= -->
+
+    <div class="control-box">
+
+        <label for="percentageInput">
+            Resize Percentage
+        </label>
+
+        <select id="percentageInput">
+
+            <option value="custom">
+                Custom / Exact Size
+            </option>
+
+            <option value="25">
+                25%
+            </option>
+
+            <option value="50">
+                50%
+            </option>
+
+            <option value="75">
+                75%
+            </option>
+
+            <option value="100">
+                100%
+            </option>
+
+            <option value="125">
+                125%
+            </option>
+
+            <option value="150">
+                150%
+            </option>
+
+            <option value="200">
+                200%
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- ================================
+         OUTPUT FORMAT
+    ================================= -->
+
+    <div class="control-box">
+
+        <label for="formatInput">
+            Output Format
+        </label>
+
+        <select id="formatInput">
+
+            <option value="image/jpeg">
+                JPG
+            </option>
+
+            <option value="image/png">
+                PNG
+            </option>
+
+            <option value="image/webp">
+                WebP
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- ================================
+         IMAGE QUALITY
+    ================================= -->
+
+    <div class="control-box full">
+
+        <label for="qualityInput">
+
+            Image Quality:
+            <span id="qualityValue">
+                90
+            </span>%
+
+        </label>
+
+
+        <input
+            type="range"
+            id="qualityInput"
+            min="10"
+            max="100"
+            value="90"
+            step="1"
+        >
+
+
+        <small style="
+            display:block;
+            margin-top:6px;
+            color:#777;
+        ">
+
+            Higher quality gives better image quality
+            but may create a larger file.
+
+        </small>
+
+    </div>
+
+
+
+    <!-- ================================
+         TARGET FILE SIZE
+    ================================= -->
+
+    <div class="control-box full">
+
+        <label for="targetSizeInput">
+
+            Target File Size
+
+            <span style="
+                font-weight:400;
+                color:#777;
+            ">
+
+                (Optional)
+
+            </span>
+
+        </label>
+
+
+        <div class="target-row">
+
+            <input
+                type="number"
+                id="targetSizeInput"
+                min="1"
+                step="1"
+                placeholder="Example: 100"
+            >
+
+
+            <select id="targetUnitInput">
+
+                <option value="KB">
+                    KB
+                </option>
+
+                <option value="MB">
+                    MB
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <small style="
+            display:block;
+            margin-top:7px;
+            color:#777;
+            line-height:1.5;
+        ">
+
+            Optional. Useful when a website, application
+            or form requires a specific maximum file size.
+
+        </small>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================
+     PREVIEW
+====================================== -->
+
+<div class="preview-box">
+
+
+    <div id="previewPlaceholder">
+
+        <p style="
+            margin:0;
+            color:#777;
+        ">
+
+            Your resized image preview will appear here.
+
+        </p>
+
+    </div>
+
+
+    <img
+        id="previewImage"
+        alt="Resized image preview"
+        style="display:none;"
+    >
+
+
+    <div class="output-info">
+
+
+        <span id="dimensionInfo">
+            Output: —
+        </span>
+
+
+        <span id="sizeInfo">
+            File size: —
+        </span>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================
+     ACTION BUTTONS
+====================================== -->
+
+<div class="button-row">
+
+
+    <button
+        type="button"
+        class="tool-button primary-button"
+        id="resizeButton"
+        disabled
+    >
+
+        Resize & Download
+
+    </button>
+
+
+    <button
+        type="button"
+        class="tool-button secondary-button"
+        id="resetButton"
+    >
+
+        Choose Another Image
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================
+     STATUS MESSAGE
+====================================== -->
+
+<div
+    class="status"
+    id="status"
+    aria-live="polite"
+></div>
+
+
+
+<!-- =====================================
+     PRIVACY MESSAGE
+====================================== -->
+
+<div class="privacy-note">
+
+    <strong>
+        Privacy-focused:
+    </strong>
+
+    Your image is processed directly in your browser.
+    Toolton does not need to upload your selected image
+    to a server for resizing.
+
+</div>
+
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             PART 4
+             SEO + FAQ
+        ====================================== -->
+
+
+        <!-- =====================================
+     PART 4 — SEO CONTENT + FAQ
+====================================== -->
+
+<section class="tool-content">
+
+
+    <!-- ================================
+         ABOUT THE TOOL
+    ================================= -->
+
+    <h2>
+        Free Image Resizer Online
+    </h2>
+
+    <p>
+        Toolton Image Resizer is a free online tool that
+        lets you resize photos and images to exact
+        dimensions directly in your browser. You can
+        resize JPG, PNG and WebP images without creating
+        an account or installing software.
+    </p>
+
+
+    <h3>
+        Resize Images to Exact Dimensions
+    </h3>
+
+    <p>
+        Set a custom width and height in pixels, centimetres
+        or inches. You can keep the original aspect ratio
+        or turn it off when you need an exact width and
+        height.
+    </p>
+
+
+    <h3>
+        Passport Photo and Signature Sizes
+    </h3>
+
+    <p>
+        Use the built-in size presets for common requirements
+        such as passport photos, square photos, signatures
+        and A4 documents. You can also change the dimensions
+        manually whenever a specific application requires a
+        different size.
+    </p>
+
+
+    <h3>
+        Reduce Image File Size
+    </h3>
+
+    <p>
+        Adjust image quality and optionally set a target file
+        size in KB or MB. This can be useful when uploading
+        photographs to forms, websites, applications or
+        documents that have file-size limits.
+    </p>
+
+
+    <h3>
+        Resize Images Without Login
+    </h3>
+
+    <p>
+        Toolton is designed to be simple and accessible.
+        No account or login is required to use the Image
+        Resizer.
+    </p>
+
+
+    <h3>
+        Privacy-Focused Image Resizing
+    </h3>
+
+    <p>
+        Image processing is performed directly in your
+        browser. Your selected image does not need to be
+        uploaded to a Toolton server for the resizing
+        process.
+    </p>
+
+
+    <!-- ================================
+         HOW TO USE
+    ================================= -->
+
+    <h2>
+        How to Resize an Image
+    </h2>
+
+    <ol>
+
+        <li>
+            Choose or drag and drop your image.
+        </li>
+
+        <li>
+            Select a preset or enter your own dimensions.
+        </li>
+
+        <li>
+            Choose pixels, centimetres or inches.
+        </li>
+
+        <li>
+            Set DPI if required for printing or official
+            document purposes.
+        </li>
+
+        <li>
+            Choose the output format and image quality.
+        </li>
+
+        <li>
+            Optionally enter a target file size.
+        </li>
+
+        <li>
+            Click <strong>Resize & Download</strong>.
+        </li>
+
+    </ol>
+
+
+    <!-- ================================
+         FAQ
+    ================================= -->
+
+    <h2>
+        Frequently Asked Questions
+    </h2>
+
+
+    <h3>
+        Is Toolton Image Resizer free?
+    </h3>
+
+    <p>
+        Yes. The Toolton Image Resizer is designed to be
+        free to use without requiring a login.
+    </p>
+
+
+    <h3>
+        Can I resize an image to a specific width and height?
+    </h3>
+
+    <p>
+        Yes. You can enter the exact width and height you
+        need. You can also turn off the aspect-ratio lock
+        when width and height need to be independent.
+    </p>
+
+
+    <h3>
+        Can I resize an image in CM or inches?
+    </h3>
+
+    <p>
+        Yes. You can select pixels, centimetres or inches.
+        DPI can also be specified when working with physical
+        print dimensions.
+    </p>
+
+
+    <h3>
+        Can I make a passport-size photo?
+    </h3>
+
+    <p>
+        Yes. The tool includes common passport-photo presets
+        and also allows you to enter custom dimensions.
+        Always check the exact size required by the
+        organisation or application you are submitting to.
+    </p>
+
+
+    <h3>
+        Can I reduce an image to a specific KB or MB size?
+    </h3>
+
+    <p>
+        You can enter an optional target file size in KB or
+        MB. The tool will attempt to adjust compression to
+        get as close as practical to the requested size.
+        Exact file size can vary depending on the image and
+        output format.
+    </p>
+
+
+    <h3>
+        Does Toolton upload my photos?
+    </h3>
+
+    <p>
+        The resizing process is designed to happen directly
+        in your browser, so your image does not need to be
+        uploaded to a Toolton server.
+    </p>
+
+
+    <h3>
+        Which image formats are supported?
+    </h3>
+
+    <p>
+        The tool supports JPG, PNG and WebP images.
+        Depending on the selected output format, you can
+        convert an image while resizing it.
+    </p>
+
+
+</section>
+
+
+<!-- =====================================
+     END PART 4
+====================================== -->
+
+
+    </div>
+
 </main>
 
+
+
+<!-- =====================================
+     FOOTER
+====================================== -->
 
 <footer class="site-footer">
 
     <div class="container footer-inner">
 
+
         <div>
 
-            <strong>Toolton</strong>
+            <strong>
+                Toolton
+            </strong>
 
             <p>
                 Useful tools. One simple place.
@@ -974,29 +1431,50 @@
         </div>
 
 
-        <nav class="footer-links"
-             aria-label="Footer navigation">
+        <nav class="footer-links">
 
-            <a href="../../../about.html">About</a>
-            <a href="../../../contact.html">Contact</a>
-            <a href="../../../privacy.html">Privacy</a>
-            <a href="../../../terms.html">Terms</a>
-            <a href="../../../disclaimer.html">Disclaimer</a>
+            <a href="../../../about.html">
+                About
+            </a>
+
+            <a href="../../../contact.html">
+                Contact
+            </a>
+
+            <a href="../../../privacy.html">
+                Privacy
+            </a>
+
+            <a href="../../../terms.html">
+                Terms
+            </a>
+
+            <a href="../../../disclaimer.html">
+                Disclaimer
+            </a>
 
         </nav>
 
 
         <p class="copyright">
+
             © 2026 Toolton. All rights reserved.
+
         </p>
+
 
     </div>
 
 </footer>
 
 
+<!-- =====================================
+     JAVASCRIPT
+     PART 5 WILL CONNECT SCRIPT.JS
+====================================== -->
+
 <script src="script.js"></script>
+
 
 </body>
 </html>
-            
