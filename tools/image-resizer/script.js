@@ -1,6 +1,7 @@
 /* =========================================
    TOOLTON IMAGE RESIZER
-   ========================================= */
+   SCRIPT.JS — PART 1/2
+========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -8,22 +9,38 @@ document.addEventListener("DOMContentLoaded", () => {
        ELEMENTS
     ====================================== */
 
-    const fileInput = document.getElementById("fileInput");
-    const uploadArea = document.getElementById("uploadArea");
-    const editor = document.getElementById("editor");
+    const fileInput =
+        document.getElementById("fileInput");
 
-    const originalInfo = document.getElementById("originalInfo");
-    const fileInfo = document.getElementById("fileInfo");
+    const uploadArea =
+        document.getElementById("uploadArea");
 
-    const presetInput = document.getElementById("presetInput");
+    const editor =
+        document.getElementById("editor");
 
-    const widthInput = document.getElementById("widthInput");
-    const heightInput = document.getElementById("heightInput");
+    const originalInfo =
+        document.getElementById("originalInfo");
 
-    const lockRatio = document.getElementById("lockRatio");
+    const fileInfo =
+        document.getElementById("fileInfo");
 
-    const unitInput = document.getElementById("unitInput");
-    const dpiInput = document.getElementById("dpiInput");
+    const presetInput =
+        document.getElementById("presetInput");
+
+    const unitInput =
+        document.getElementById("unitInput");
+
+    const dpiInput =
+        document.getElementById("dpiInput");
+
+    const widthInput =
+        document.getElementById("widthInput");
+
+    const heightInput =
+        document.getElementById("heightInput");
+
+    const lockRatio =
+        document.getElementById("lockRatio");
 
     const percentageInput =
         document.getElementById("percentageInput");
@@ -47,19 +64,29 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("previewImage");
 
     const previewPlaceholder =
-        document.getElementById("previewPlaceholder");
+        document.getElementById(
+            "previewPlaceholder"
+        );
 
     const dimensionInfo =
-        document.getElementById("dimensionInfo");
+        document.getElementById(
+            "dimensionInfo"
+        );
 
     const sizeInfo =
-        document.getElementById("sizeInfo");
+        document.getElementById(
+            "sizeInfo"
+        );
 
     const resizeButton =
-        document.getElementById("resizeButton");
+        document.getElementById(
+            "resizeButton"
+        );
 
     const resetButton =
-        document.getElementById("resetButton");
+        document.getElementById(
+            "resetButton"
+        );
 
     const status =
         document.getElementById("status");
@@ -70,9 +97,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================== */
 
     let originalImage = null;
+
     let originalFile = null;
 
     let originalWidth = 0;
+
     let originalHeight = 0;
 
     let aspectRatio = 1;
@@ -81,12 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================
-       HELPER FUNCTIONS
+       BASIC HELPERS
     ====================================== */
 
     function formatBytes(bytes) {
 
-        if (!bytes || bytes <= 0) {
+        if (
+            !bytes ||
+            bytes <= 0
+        ) {
             return "0 B";
         }
 
@@ -97,32 +129,48 @@ document.addEventListener("DOMContentLoaded", () => {
             "GB"
         ];
 
-        const i = Math.floor(
-            Math.log(bytes) / Math.log(1024)
-        );
+        const index =
+            Math.floor(
+                Math.log(bytes) /
+                Math.log(1024)
+            );
 
         return (
             bytes /
-            Math.pow(1024, i)
-        ).toFixed(i === 0 ? 0 : 2)
+            Math.pow(
+                1024,
+                index
+            )
+        ).toFixed(
+            index === 0 ? 0 : 2
+        )
         + " "
-        + units[i];
+        + units[index];
+
     }
 
 
     function setStatus(message) {
 
         if (status) {
-            status.textContent = message;
+            status.textContent =
+                message;
         }
 
     }
 
 
-    function clamp(value, min, max) {
+    function clamp(
+        value,
+        min,
+        max
+    ) {
 
         return Math.min(
-            Math.max(value, min),
+            Math.max(
+                value,
+                min
+            ),
             max
         );
 
@@ -130,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================
-       FILE UPLOAD
+       IMAGE UPLOAD
     ====================================== */
 
     function loadImage(file) {
@@ -140,10 +188,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        if (!file.type.startsWith("image/")) {
+        if (
+            !file.type ||
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
 
             setStatus(
-                "Please select a valid image file."
+                "Please select a valid image."
             );
 
             return;
@@ -157,91 +210,164 @@ document.addEventListener("DOMContentLoaded", () => {
         ];
 
 
-        if (!allowedTypes.includes(file.type)) {
+        if (
+            !allowedTypes.includes(
+                file.type
+            )
+        ) {
 
             setStatus(
-                "Please use JPG, PNG or WebP."
+                "Please choose JPG, PNG or WebP."
             );
 
             return;
         }
 
 
-        originalFile = file;
+        originalFile =
+            file;
 
 
-        const reader = new FileReader();
+        const reader =
+            new FileReader();
 
 
-        reader.onload = function(event) {
+        reader.onload =
+            function(event) {
 
-            const img = new Image();
-
-
-            img.onload = function() {
-
-                originalImage = img;
-
-                originalWidth = img.naturalWidth;
-                originalHeight = img.naturalHeight;
-
-                aspectRatio =
-                    originalWidth /
-                    originalHeight;
+                const image =
+                    new Image();
 
 
-                widthInput.value =
-                    originalWidth;
+                image.onload =
+                    function() {
 
-                heightInput.value =
-                    originalHeight;
-
-
-                originalInfo.textContent =
-                    "Original: "
-                    + originalWidth
-                    + " × "
-                    + originalHeight
-                    + " px";
+                        originalImage =
+                            image;
 
 
-                fileInfo.textContent =
-                    "File size: "
-                    + formatBytes(file.size);
+                        originalWidth =
+                            image.naturalWidth;
 
 
-                editor.classList.add("active");
+                        originalHeight =
+                            image.naturalHeight;
 
-                resizeButton.disabled = false;
+
+                        aspectRatio =
+                            originalWidth /
+                            originalHeight;
 
 
-                updatePreview();
+                        widthInput.value =
+                            originalWidth;
 
+
+                        heightInput.value =
+                            originalHeight;
+
+
+                        unitInput.value =
+                            "px";
+
+
+                        unitInput.dataset.previous =
+                            "px";
+
+
+                        dpiInput.value =
+                            "300";
+
+
+                        lockRatio.checked =
+                            true;
+
+
+                        originalInfo.textContent =
+                            "Original: "
+                            + originalWidth
+                            + " × "
+                            + originalHeight
+                            + " px";
+
+
+                        fileInfo.textContent =
+                            "File size: "
+                            + formatBytes(
+                                file.size
+                            );
+
+
+                        editor.classList.add(
+                            "active"
+                        );
+
+
+                        resizeButton.disabled =
+                            false;
+
+
+                        setStatus(
+                            "Image loaded successfully."
+                        );
+
+
+                        updatePreview();
+
+                    };
+
+
+                image.onerror =
+                    function() {
+
+                        setStatus(
+                            "Unable to read this image."
+                        );
+
+                    };
+
+
+                image.src =
+                    event.target.result;
+
+            };
+
+
+        reader.onerror =
+            function() {
 
                 setStatus(
-                    "Image loaded successfully."
+                    "Unable to read the selected file."
                 );
 
             };
 
 
-            img.src = event.target.result;
-
-        };
-
-
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(
+            file
+        );
 
     }
 
+
+    /* =====================================
+       FILE INPUT
+    ====================================== */
 
     fileInput.addEventListener(
         "change",
         function() {
 
-            const file = this.files[0];
+            if (
+                this.files &&
+                this.files.length > 0
+            ) {
 
-            loadImage(file);
+                loadImage(
+                    this.files[0]
+                );
+
+            }
 
         }
     );
@@ -291,7 +417,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const file =
                 event.dataTransfer.files[0];
 
-            loadImage(file);
+
+            if (file) {
+
+                loadImage(file);
+
+            }
 
         }
     );
@@ -301,54 +432,41 @@ document.addEventListener("DOMContentLoaded", () => {
        UNIT CONVERSION
     ====================================== */
 
-    function pixelsToUnit(
-        pixels,
-        unit,
-        dpi
-    ) {
-
-        if (unit === "px") {
-            return pixels;
-        }
-
-
-        if (unit === "in") {
-            return pixels / dpi;
-        }
-
-
-        if (unit === "cm") {
-            return (
-                pixels / dpi
-            ) * 2.54;
-        }
-
-
-        return pixels;
-
-    }
-
-
-    function unitToPixels(
+    function toPixels(
         value,
         unit,
         dpi
     ) {
 
         if (unit === "px") {
+
             return value;
+
         }
 
 
         if (unit === "in") {
+
             return value * dpi;
+
         }
 
 
         if (unit === "cm") {
+
             return (
                 value / 2.54
             ) * dpi;
+
+        }
+
+
+        if (unit === "mm") {
+
+            return (
+                value / 25.4
+            ) * dpi;
+
         }
 
 
@@ -357,87 +475,90 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function displayDimensions() {
-
-        if (!originalImage) {
-            return;
-        }
-
-
-        const unit =
-            unitInput.value;
-
-        const dpi =
-            Math.max(
-                1,
-                Number(dpiInput.value) || 300
-            );
-
-
-        const width =
-            Number(widthInput.value) || 0;
-
-        const height =
-            Number(heightInput.value) || 0;
-
+    function fromPixels(
+        pixels,
+        unit,
+        dpi
+    ) {
 
         if (unit === "px") {
 
-            widthInput.value =
-                Math.round(width);
+            return pixels;
 
-            heightInput.value =
-                Math.round(height);
-
-            return;
         }
 
 
-        widthInput.value =
-            pixelsToUnit(
-                width,
-                unit,
-                dpi
-            ).toFixed(2);
+        if (unit === "in") {
+
+            return pixels / dpi;
+
+        }
 
 
-        heightInput.value =
-            pixelsToUnit(
-                height,
-                unit,
-                dpi
-            ).toFixed(2);
+        if (unit === "cm") {
+
+            return (
+                pixels / dpi
+            ) * 2.54;
+
+        }
+
+
+        if (unit === "mm") {
+
+            return (
+                pixels / dpi
+            ) * 25.4;
+
+        }
+
+
+        return pixels;
 
     }
 
 
-    function convertInputsToPixels() {
+    function getPixelDimensions() {
+
+        let width =
+            Number(
+                widthInput.value
+            );
+
+
+        let height =
+            Number(
+                heightInput.value
+            );
+
+
+        if (
+            !width ||
+            !height ||
+            width <= 0 ||
+            height <= 0
+        ) {
+
+            return null;
+
+        }
+
 
         const unit =
             unitInput.value;
 
+
         const dpi =
             Math.max(
                 1,
-                Number(dpiInput.value) || 300
+                Number(
+                    dpiInput.value
+                ) || 300
             );
 
 
-        let width =
-            Number(widthInput.value);
-
-
-        let height =
-            Number(heightInput.value);
-
-
-        if (!width || !height) {
-            return null;
-        }
-
-
         width =
-            unitToPixels(
+            toPixels(
                 width,
                 unit,
                 dpi
@@ -445,7 +566,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         height =
-            unitToPixels(
+            toPixels(
                 height,
                 unit,
                 dpi
@@ -454,19 +575,288 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return {
 
-            width: Math.max(
+            width: clamp(
+                Math.round(width),
                 1,
-                Math.round(width)
+                10000
             ),
 
-            height: Math.max(
+            height: clamp(
+                Math.round(height),
                 1,
-                Math.round(height)
+                10000
             )
 
         };
 
     }
+
+
+    function setDimensionsFromPixels(
+        width,
+        height
+    ) {
+
+        const unit =
+            unitInput.value;
+
+
+        const dpi =
+            Math.max(
+                1,
+                Number(
+                    dpiInput.value
+                ) || 300
+            );
+
+
+        const convertedWidth =
+            fromPixels(
+                width,
+                unit,
+                dpi
+            );
+
+
+        const convertedHeight =
+            fromPixels(
+                height,
+                unit,
+                dpi
+            );
+
+
+        if (unit === "px") {
+
+            widthInput.value =
+                Math.round(
+                    convertedWidth
+                );
+
+
+            heightInput.value =
+                Math.round(
+                    convertedHeight
+                );
+
+        }
+
+        else {
+
+            widthInput.value =
+                convertedWidth.toFixed(
+                    2
+                );
+
+
+            heightInput.value =
+                convertedHeight.toFixed(
+                    2
+                );
+
+        }
+
+    }
+
+
+    /* =====================================
+       WIDTH — ASPECT RATIO
+    ====================================== */
+
+    widthInput.addEventListener(
+        "input",
+        function() {
+
+            if (
+                !originalImage
+            ) {
+                return;
+            }
+
+
+            if (
+                !lockRatio.checked
+            ) {
+
+                updatePreview();
+
+                return;
+
+            }
+
+
+            const width =
+                Number(
+                    widthInput.value
+                );
+
+
+            if (
+                !width ||
+                width <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            const dpi =
+                Math.max(
+                    1,
+                    Number(
+                        dpiInput.value
+                    ) || 300
+                );
+
+
+            const widthPx =
+                toPixels(
+                    width,
+                    unitInput.value,
+                    dpi
+                );
+
+
+            const heightPx =
+                widthPx /
+                aspectRatio;
+
+
+            const convertedHeight =
+                fromPixels(
+                    heightPx,
+                    unitInput.value,
+                    dpi
+                );
+
+
+            if (
+                unitInput.value ===
+                "px"
+            ) {
+
+                heightInput.value =
+                    Math.round(
+                        convertedHeight
+                    );
+
+            }
+
+            else {
+
+                heightInput.value =
+                    convertedHeight.toFixed(
+                        2
+                    );
+
+            }
+
+
+            updatePreview();
+
+        }
+    );
+
+
+    /* =====================================
+       HEIGHT — ASPECT RATIO
+    ====================================== */
+
+    heightInput.addEventListener(
+        "input",
+        function() {
+
+            if (
+                !originalImage
+            ) {
+                return;
+            }
+
+
+            if (
+                !lockRatio.checked
+            ) {
+
+                updatePreview();
+
+                return;
+
+            }
+
+
+            const height =
+                Number(
+                    heightInput.value
+                );
+
+
+            if (
+                !height ||
+                height <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            const dpi =
+                Math.max(
+                    1,
+                    Number(
+                        dpiInput.value
+                    ) || 300
+                );
+
+
+            const heightPx =
+                toPixels(
+                    height,
+                    unitInput.value,
+                    dpi
+                );
+
+
+            const widthPx =
+                heightPx *
+                aspectRatio;
+
+
+            const convertedWidth =
+                fromPixels(
+                    widthPx,
+                    unitInput.value,
+                    dpi
+                );
+
+
+            if (
+                unitInput.value ===
+                "px"
+            ) {
+
+                widthInput.value =
+                    Math.round(
+                        convertedWidth
+                    );
+
+            }
+
+            else {
+
+                widthInput.value =
+                    convertedWidth.toFixed(
+                        2
+                    );
+
+            }
+
+
+            updatePreview();
+
+        }
+    );
 
 
     /* =====================================
@@ -477,50 +867,71 @@ document.addEventListener("DOMContentLoaded", () => {
         "change",
         function() {
 
-            if (!originalImage) {
+            if (
+                !originalImage
+            ) {
+
                 return;
-            }
 
-
-            const pixels =
-                convertInputsToPixels();
-
-
-            if (!pixels) {
-                return;
             }
 
 
             const oldUnit =
-                unitInput.dataset.previousUnit
+                unitInput.dataset.previous
                 || "px";
 
 
-            if (oldUnit === "px") {
-
-                widthInput.value =
-                    pixels.width;
-
-                heightInput.value =
-                    pixels.height;
-
-            }
+            const oldDpi =
+                Math.max(
+                    1,
+                    Number(
+                        dpiInput.value
+                    ) || 300
+                );
 
 
-            unitInput.dataset.previousUnit =
+            let widthPx =
+                Number(
+                    widthInput.value
+                );
+
+
+            let heightPx =
+                Number(
+                    heightInput.value
+                );
+
+
+            widthPx =
+                toPixels(
+                    widthPx,
+                    oldUnit,
+                    oldDpi
+                );
+
+
+            heightPx =
+                toPixels(
+                    heightPx,
+                    oldUnit,
+                    oldDpi
+                );
+
+
+            setDimensionsFromPixels(
+                widthPx,
+                heightPx
+            );
+
+
+            unitInput.dataset.previous =
                 unitInput.value;
 
-
-            displayDimensions();
 
             updatePreview();
 
         }
     );
-
-
-    unitInput.dataset.previousUnit =
-        "px";
 
 
     /* =====================================
@@ -531,26 +942,75 @@ document.addEventListener("DOMContentLoaded", () => {
         "change",
         function() {
 
-            if (!originalImage) {
+            if (
+                !originalImage
+            ) {
+
                 return;
+
             }
 
 
-            if (unitInput.value !== "px") {
+            /*
+             * Keep actual pixel dimensions
+             * when changing DPI.
+             */
 
-                const pixels =
-                    convertInputsToPixels();
+            const dimensions =
+                getPixelDimensions();
 
 
-                if (pixels) {
+            if (!dimensions) {
 
-                    widthInput.value =
-                        pixels.width;
+                return;
 
-                    heightInput.value =
-                        pixels.height;
+            }
 
-                    displayDimensions();
+
+            setDimensionsFromPixels(
+                dimensions.width,
+                dimensions.height
+            );
+
+
+            updatePreview();
+
+        }
+    );
+
+
+    /* =====================================
+       LOCK RATIO
+    ====================================== */
+
+    lockRatio.addEventListener(
+        "change",
+        function() {
+
+            if (
+                !originalImage
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                this.checked
+            ) {
+
+                const dimensions =
+                    getPixelDimensions();
+
+
+                if (
+                    dimensions
+                ) {
+
+                    aspectRatio =
+                        dimensions.width /
+                        dimensions.height;
 
                 }
 
@@ -561,280 +1021,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================
-       ASPECT RATIO
-    ====================================== */
-
-    widthInput.addEventListener(
-        "input",
-        function() {
-
-            if (
-                !lockRatio.checked ||
-                !originalImage
-            ) {
-                updatePreview();
-                return;
-            }
-
-
-            const width =
-                Number(widthInput.value);
-
-
-            if (!width) {
-                return;
-            }
-
-
-            const unit =
-                unitInput.value;
-
-            const dpi =
-                Math.max(
-                    1,
-                    Number(dpiInput.value) || 300
-                );
-
-
-            const widthPx =
-                unitToPixels(
-                    width,
-                    unit,
-                    dpi
-                );
-
-
-            const heightPx =
-                widthPx /
-                aspectRatio;
-
-
-            heightInput.value =
-                unit === "px"
-                    ? Math.round(heightPx)
-                    : pixelsToUnit(
-                        heightPx,
-                        unit,
-                        dpi
-                    ).toFixed(2);
-
-
-            updatePreview();
-
-        }
-    );
-
-
-    heightInput.addEventListener(
-        "input",
-        function() {
-
-            if (
-                !lockRatio.checked ||
-                !originalImage
-            ) {
-                updatePreview();
-                return;
-            }
-
-
-            const height =
-                Number(heightInput.value);
-
-
-            if (!height) {
-                return;
-            }
-
-
-            const unit =
-                unitInput.value;
-
-            const dpi =
-                Math.max(
-                    1,
-                    Number(dpiInput.value) || 300
-                );
-
-
-            const heightPx =
-                unitToPixels(
-                    height,
-                    unit,
-                    dpi
-                );
-
-
-            const widthPx =
-                heightPx *
-                aspectRatio;
-
-
-            widthInput.value =
-                unit === "px"
-                    ? Math.round(widthPx)
-                    : pixelsToUnit(
-                        widthPx,
-                        unit,
-                        dpi
-                    ).toFixed(2);
-
-
-            updatePreview();
-
-        }
-    );
-
-
-    /* =====================================
-       PRESETS
-    ====================================== */
-
-    const presets = {
-
-        passport35x45: {
-            width: 35,
-            height: 45,
-            unit: "cm",
-            factor: 0.1
-        },
-
-        passport2x2: {
-            width: 2,
-            height: 2,
-            unit: "in"
-        },
-
-        signature: {
-            width: 4,
-            height: 2,
-            unit: "cm"
-        },
-
-        square: {
-            width: 1,
-            height: 1,
-            unit: "in"
-        },
-
-        a4: {
-            width: 21,
-            height: 29.7,
-            unit: "cm"
-        }
-
-    };
-
-
-    presetInput.addEventListener(
-        "change",
-        function() {
-
-            const preset =
-                presets[this.value];
-
-
-            if (!preset) {
-                return;
-            }
-
-
-            unitInput.value =
-                preset.unit;
-
-
-            unitInput.dataset.previousUnit =
-                preset.unit;
-
-
-            dpiInput.value =
-                300;
-
-
-            widthInput.value =
-                preset.width;
-
-            heightInput.value =
-                preset.height;
-
-
-            lockRatio.checked =
-                false;
-
-
-            updatePreview();
-
-        }
-    );
-
-
-    /* =====================================
-       PERCENTAGE RESIZE
-    ====================================== */
-
-    percentageInput.addEventListener(
-        "change",
-        function() {
-
-            if (
-                !originalImage ||
-                this.value === "custom"
-            ) {
-                return;
-            }
-
-
-            const percentage =
-                Number(this.value);
-
-
-            if (!percentage) {
-                return;
-            }
-
-
-            unitInput.value =
-                "px";
-
-
-            unitInput.dataset.previousUnit =
-                "px";
-
-
-            widthInput.value =
-                Math.max(
-                    1,
-                    Math.round(
-                        originalWidth *
-                        percentage /
-                        100
-                    )
-                );
-
-
-            heightInput.value =
-                Math.max(
-                    1,
-                    Math.round(
-                        originalHeight *
-                        percentage /
-                        100
-                    )
-                );
-
-
-            lockRatio.checked =
-                true;
-
-
-            updatePreview();
-
-        }
-    );
-
-
-    /* =====================================
-       QUALITY
+       QUALITY DISPLAY
     ====================================== */
 
     qualityInput.addEventListener(
@@ -844,12 +1031,21 @@ document.addEventListener("DOMContentLoaded", () => {
             qualityValue.textContent =
                 this.value;
 
+
+            if (
+                originalImage
+            ) {
+
+                updatePreview();
+
+            }
+
         }
     );
 
 
     /* =====================================
-       CANVAS CREATION
+       CANVAS
     ====================================== */
 
     function createCanvas(
@@ -870,22 +1066,23 @@ document.addEventListener("DOMContentLoaded", () => {
             height;
 
 
-        const ctx =
+        const context =
             canvas.getContext(
                 "2d"
             );
 
 
-        ctx.imageSmoothingEnabled =
+        context.imageSmoothingEnabled =
             true;
 
-        ctx.imageSmoothingQuality =
+
+        context.imageSmoothingQuality =
             "high";
 
 
         return {
             canvas,
-            ctx
+            context
         };
 
     }
@@ -897,40 +1094,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updatePreview() {
 
-        if (!originalImage) {
+        if (
+            !originalImage
+        ) {
+
             return;
+
         }
 
 
-        const pixels =
-            convertInputsToPixels();
+        const dimensions =
+            getPixelDimensions();
 
 
-        if (!pixels) {
+        if (
+            !dimensions
+        ) {
+
             return;
+
         }
-
-
-        const width =
-            pixels.width;
-
-        const height =
-            pixels.height;
 
 
         const result =
             createCanvas(
-                width,
-                height
+                dimensions.width,
+                dimensions.height
             );
 
 
-        result.ctx.drawImage(
+        result.context.drawImage(
             originalImage,
             0,
             0,
-            width,
-            height
+            dimensions.width,
+            dimensions.height
         );
 
 
@@ -948,11 +1146,15 @@ document.addEventListener("DOMContentLoaded", () => {
             function(blob) {
 
                 if (!blob) {
+
                     return;
+
                 }
 
 
-                if (previewURL) {
+                if (
+                    previewURL
+                ) {
 
                     URL.revokeObjectURL(
                         previewURL
@@ -981,9 +1183,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 dimensionInfo.textContent =
                     "Output: "
-                    + width
+                    + dimensions.width
                     + " × "
-                    + height
+                    + dimensions.height
                     + " px";
 
 
@@ -999,34 +1201,205 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     }
-
-
-    widthInput.addEventListener(
-        "input",
-        updatePreview
-    );
-
-    heightInput.addEventListener(
-        "input",
-        updatePreview
-    );
+   
+/* =====================================
+       FORMAT CHANGE
+    ====================================== */
 
     formatInput.addEventListener(
         "change",
-        updatePreview
+        function() {
+
+            if (
+                originalImage
+            ) {
+
+                updatePreview();
+
+            }
+
+        }
     );
 
-    qualityInput.addEventListener(
+    /* =====================================
+       PASSPORT / SIZE PRESETS
+    ====================================== */
+
+    const presets = {
+
+        passport35x45: {
+            width: 35,
+            height: 45,
+            unit: "mm"
+        },
+
+        passport2x2: {
+            width: 2,
+            height: 2,
+            unit: "in"
+        },
+
+        passport25x35: {
+            width: 25,
+            height: 35,
+            unit: "mm"
+        },
+
+        signature: {
+            width: 40,
+            height: 20,
+            unit: "mm"
+        },
+
+        square1: {
+            width: 1,
+            height: 1,
+            unit: "in"
+        },
+
+        a4: {
+            width: 210,
+            height: 297,
+            unit: "mm"
+        }
+
+    };
+
+
+    presetInput.addEventListener(
         "change",
-        updatePreview
+        function () {
+
+            const preset =
+                presets[this.value];
+
+
+            if (!preset) {
+
+                return;
+
+            }
+
+
+            unitInput.value =
+                preset.unit;
+
+
+            unitInput.dataset.previous =
+                preset.unit;
+
+
+            widthInput.value =
+                preset.width;
+
+
+            heightInput.value =
+                preset.height;
+
+
+            /*
+             * Presets must use exact
+             * independent dimensions.
+             */
+
+            lockRatio.checked =
+                false;
+
+
+            updatePreview();
+
+        }
     );
+
+
+
+    /* =====================================
+       PERCENTAGE RESIZE
+    ====================================== */
+
+    percentageInput.addEventListener(
+        "change",
+        function () {
+
+            if (
+                !originalImage ||
+                this.value === "custom"
+            ) {
+
+                return;
+
+            }
+
+
+            const percentage =
+                Number(
+                    this.value
+                );
+
+
+            if (
+                !percentage
+            ) {
+
+                return;
+
+            }
+
+
+            unitInput.value =
+                "px";
+
+
+            unitInput.dataset.previous =
+                "px";
+
+
+            const newWidth =
+                Math.max(
+                    1,
+                    Math.round(
+                        originalWidth *
+                        percentage /
+                        100
+                    )
+                );
+
+
+            const newHeight =
+                Math.max(
+                    1,
+                    Math.round(
+                        originalHeight *
+                        percentage /
+                        100
+                    )
+                );
+
+
+            widthInput.value =
+                newWidth;
+
+
+            heightInput.value =
+                newHeight;
+
+
+            lockRatio.checked =
+                true;
+
+
+            updatePreview();
+
+        }
+    );
+
 
 
     /* =====================================
        TARGET FILE SIZE
     ====================================== */
 
-    function targetBytes() {
+    function getTargetBytes() {
 
         const value =
             Number(
@@ -1034,8 +1407,13 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        if (!value || value <= 0) {
+        if (
+            !value ||
+            value <= 0
+        ) {
+
             return null;
+
         }
 
 
@@ -1044,29 +1422,43 @@ document.addEventListener("DOMContentLoaded", () => {
             "MB"
         ) {
 
-            return value *
-                   1024 *
-                   1024;
+            return (
+                value *
+                1024 *
+                1024
+            );
 
         }
 
 
-        return value * 1024;
+        return (
+            value *
+            1024
+        );
 
     }
 
 
-    async function canvasToBlob(
+
+    /* =====================================
+       CANVAS → BLOB
+    ====================================== */
+
+    function canvasToBlob(
         canvas,
         mime,
         quality
     ) {
 
         return new Promise(
-            resolve => {
+            function (resolve) {
 
                 canvas.toBlob(
-                    blob => resolve(blob),
+                    function (blob) {
+
+                        resolve(blob);
+
+                    },
                     mime,
                     quality
                 );
@@ -1077,26 +1469,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
+    /* =====================================
+       TARGET SIZE COMPRESSION
+    ====================================== */
+
     async function compressToTarget(
         canvas,
         mime,
-        target
+        targetBytes
     ) {
 
-        let low = 0.05;
-        let high = 1;
+        let low =
+            0.05;
 
-        let bestBlob = null;
+        let high =
+            1;
 
+        let bestBlob =
+            null;
+
+
+        /*
+         * Binary search for the
+         * closest practical quality.
+         */
 
         for (
             let i = 0;
-            i < 10;
+            i < 12;
             i++
         ) {
 
             const quality =
-                (low + high) / 2;
+                (
+                    low +
+                    high
+                ) / 2;
 
 
             const blob =
@@ -1108,12 +1517,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             if (!blob) {
+
                 break;
+
             }
 
 
             if (
-                blob.size <= target
+                blob.size <=
+                targetBytes
             ) {
 
                 bestBlob =
@@ -1122,7 +1534,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 low =
                     quality;
 
-            } else {
+            }
+
+            else {
 
                 high =
                     quality;
@@ -1131,6 +1545,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
+        /*
+         * If the requested target is
+         * extremely small, return the
+         * lowest practical quality.
+         */
 
         if (!bestBlob) {
 
@@ -1149,7 +1569,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-       /* =====================================
+
+    /* =====================================
        RESIZE + DOWNLOAD
     ====================================== */
 
@@ -1157,33 +1578,37 @@ document.addEventListener("DOMContentLoaded", () => {
         "click",
         async function () {
 
-            if (!originalImage) {
+            if (
+                !originalImage
+            ) {
 
                 setStatus(
                     "Please choose an image first."
                 );
 
                 return;
+
             }
 
 
-            const pixels =
-                convertInputsToPixels();
+            const dimensions =
+                getPixelDimensions();
 
 
-            if (!pixels) {
+            if (!dimensions) {
 
                 setStatus(
-                    "Please enter valid dimensions."
+                    "Please enter valid width and height."
                 );
 
                 return;
+
             }
 
 
             const width =
                 clamp(
-                    pixels.width,
+                    dimensions.width,
                     1,
                     10000
                 );
@@ -1191,7 +1616,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const height =
                 clamp(
-                    pixels.height,
+                    dimensions.height,
                     1,
                     10000
                 );
@@ -1204,7 +1629,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-            result.ctx.drawImage(
+            result.context.drawImage(
                 originalImage,
                 0,
                 0,
@@ -1224,7 +1649,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             const target =
-                targetBytes();
+                getTargetBytes();
 
 
             resizeButton.disabled =
@@ -1232,7 +1657,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             setStatus(
-                "Processing image..."
+                "Processing your image..."
             );
 
 
@@ -1242,15 +1667,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                 * Target file size
-                 * JPG + WebP
+                 * Target-size compression
+                 * is supported for JPG
+                 * and WebP.
                  */
 
                 if (
                     target &&
                     (
-                        mime === "image/jpeg" ||
-                        mime === "image/webp"
+                        mime ===
+                        "image/jpeg" ||
+                        mime ===
+                        "image/webp"
                     )
                 ) {
 
@@ -1278,7 +1706,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!blob) {
 
                     throw new Error(
-                        "Unable to create image."
+                        "Image creation failed."
                     );
 
                 }
@@ -1288,22 +1716,27 @@ document.addEventListener("DOMContentLoaded", () => {
                    FILE EXTENSION
                 ========================== */
 
-                let extension = "jpg";
+                let extension =
+                    "jpg";
 
 
                 if (
-                    mime === "image/png"
+                    mime ===
+                    "image/png"
                 ) {
 
-                    extension = "png";
+                    extension =
+                        "png";
 
                 }
 
                 else if (
-                    mime === "image/webp"
+                    mime ===
+                    "image/webp"
                 ) {
 
-                    extension = "webp";
+                    extension =
+                        "webp";
 
                 }
 
@@ -1345,17 +1778,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 setTimeout(
-                    () => {
+                    function () {
+
                         URL.revokeObjectURL(
                             downloadURL
                         );
+
                     },
                     1000
                 );
 
 
                 /* =========================
-                   UPDATE INFORMATION
+                   RESULT INFORMATION
                 ========================== */
 
                 dimensionInfo.textContent =
@@ -1373,41 +1808,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                if (target) {
-
-                    const targetText =
-                        formatBytes(target);
-
-
-                    if (
-                        blob.size <= target
-                    ) {
-
-                        setStatus(
-                            "Done! Image downloaded successfully. Target size: "
-                            + targetText
-                        );
-
-                    }
-
-                    else {
-
-                        setStatus(
-                            "Image downloaded. The closest practical file size was created: "
-                            + formatBytes(blob.size)
-                        );
-
-                    }
-
-                }
-
-                else {
-
-                    setStatus(
-                        "Done! Your resized image has been downloaded."
-                    );
-
-                }
+                setStatus(
+                    "Done! Your resized image has been downloaded."
+                );
 
 
             }
@@ -1439,47 +1842,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================
-       RESET TOOL
+       RESET
     ====================================== */
 
     resetButton.addEventListener(
         "click",
         function () {
 
-            /* Clear file */
-
-            fileInput.value = "";
-
-
-            /* Clear image */
-
-            originalImage = null;
-
-            originalFile = null;
-
-            originalWidth = 0;
-
-            originalHeight = 0;
-
-            aspectRatio = 1;
+            fileInput.value =
+                "";
 
 
-            /* Hide editor */
+            originalImage =
+                null;
+
+
+            originalFile =
+                null;
+
+
+            originalWidth =
+                0;
+
+
+            originalHeight =
+                0;
+
+
+            aspectRatio =
+                1;
+
 
             editor.classList.remove(
                 "active"
             );
 
 
-            /* Disable download */
-
             resizeButton.disabled =
                 true;
 
 
-            /* Clear preview */
+            previewImage.src =
+                "";
 
-            previewImage.src = "";
 
             previewImage.style.display =
                 "none";
@@ -1488,8 +1893,6 @@ document.addEventListener("DOMContentLoaded", () => {
             previewPlaceholder.style.display =
                 "block";
 
-
-            /* Clear information */
 
             originalInfo.textContent =
                 "Original: —";
@@ -1507,7 +1910,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 "File size: —";
 
 
-            /* Reset controls */
+            widthInput.value =
+                "";
+
+
+            heightInput.value =
+                "";
+
 
             presetInput.value =
                 "custom";
@@ -1521,7 +1930,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "px";
 
 
-            unitInput.dataset.previousUnit =
+            unitInput.dataset.previous =
                 "px";
 
 
@@ -1529,16 +1938,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 "300";
 
 
-            widthInput.value =
-                "";
-
-
-            heightInput.value =
-                "";
-
-
             lockRatio.checked =
                 true;
+
+
+            formatInput.value =
+                "image/jpeg";
 
 
             qualityInput.value =
@@ -1549,10 +1954,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "90";
 
 
-            formatInput.value =
-                "image/jpeg";
-
-
             targetSizeInput.value =
                 "";
 
@@ -1561,22 +1962,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 "KB";
 
 
-            /* Clear status */
-
             setStatus(
                 ""
             );
 
 
-            /* Remove old preview URL */
-
-            if (previewURL) {
+            if (
+                previewURL
+            ) {
 
                 URL.revokeObjectURL(
                     previewURL
                 );
 
-                previewURL = null;
+
+                previewURL =
+                    null;
 
             }
 
@@ -1611,4 +2012,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
-                   
+
+   
+
+                
