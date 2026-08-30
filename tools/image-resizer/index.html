@@ -1,524 +1,699 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Image Resizer Online - Resize Images Free | Toolton</title>
+<title>
+Free Image Resizer Online — Resize JPG, PNG & WebP | Toolton
+</title>
 
-    <meta name="description"
-          content="Resize JPG, PNG and WebP images online for free. Set exact width and height in pixels, CM or inches. Create passport photos, signatures and custom sizes without login.">
+<meta name="description"
+      content="Resize images online for free. Change width and height in pixels, centimetres or inches. Create passport photos, signatures and custom sizes without login.">
 
-    <meta name="keywords"
-          content="image resizer, resize image online, photo resizer, passport photo resizer, image resize in cm, image resize in inches, image resize in pixels, free image resizer">
+<meta name="keywords"
+      content="image resizer, resize image online, photo resizer, passport photo resize, image resize in cm, image resize in inches, image resize in pixels, free image resizer">
 
-    <meta name="robots"
-          content="index, follow">
+<meta name="robots"
+      content="index, follow">
 
-    <link rel="canonical"
-          href="https://toolton.github.io/tools/image-resizer/">
+<link rel="canonical"
+      href="https://toolton.github.io/tools/image-resizer/">
 
-    <meta property="og:title"
-          content="Free Image Resizer Online - Toolton">
+<link rel="icon"
+      type="image/png"
+      href="/favicon.png">
 
-    <meta property="og:description"
-          content="Resize images to exact dimensions in pixels, CM or inches. Free, fast and privacy-focused.">
+<meta property="og:type"
+      content="website">
 
-    <meta property="og:url"
-          content="https://toolton.github.io/tools/image-resizer/">
+<meta property="og:title"
+      content="Free Image Resizer Online — Toolton">
 
-    <meta property="og:type"
-          content="website">
-
-    <link rel="stylesheet"
-          href="../../../assets/css/style.css">
-
-
-    <style>
+<meta property="og:description"
+      content="Resize JPG, PNG and WebP images to exact dimensions for free.">
 
-        /* =====================================
-           IMAGE RESIZER PAGE
-        ====================================== */
+<meta property="og:url"
+      content="https://toolton.github.io/tools/image-resizer/">
 
-        .resizer-page {
-            padding: 40px 0 70px;
-        }
+<meta property="og:site_name"
+      content="Toolton">
 
-        .resizer-container {
-            width: min(1000px, calc(100% - 24px));
-            margin: auto;
-        }
-
+<link rel="stylesheet"
+      href="../../../assets/css/style.css">
 
-        /* =====================================
-           TOOL HEADING
-        ====================================== */
 
-        .tool-heading {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+<style>
 
-        .tool-heading h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            line-height: 1.1;
-            margin: 10px 0;
-        }
+/* =========================================
+   IMAGE RESIZER
+========================================= */
 
-        .tool-heading p {
-            max-width: 720px;
-            margin: auto;
-            color: #666;
-            line-height: 1.6;
-        }
+.resizer-page {
 
-        .tool-badge {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: .08em;
-        }
+    padding: 55px 0 90px;
 
+}
 
-        /* =====================================
-           TOOL CARD
-        ====================================== */
+.resizer-page > .container {
 
-        .resizer-card {
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 35px rgba(0,0,0,.06);
-        }
+    width: min(
+        1100px,
+        calc(100% - 32px)
+    );
 
+    margin: auto;
 
-        /* =====================================
-           UPLOAD AREA
-        ====================================== */
+}
 
-        .upload-area {
-            margin: 24px;
-            padding: 45px 20px;
-            border: 2px dashed #d5d5d5;
-            border-radius: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: .2s ease;
-        }
 
-        .upload-area:hover,
-        .upload-area.dragover {
-            background: #fafafa;
-            border-color: #111;
-        }
+/* =========================================
+   BREADCRUMB
+========================================= */
 
-        .upload-icon {
-            font-size: 30px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
+.breadcrumb {
 
-        .upload-area h2 {
-            margin: 0 0 8px;
-            font-size: 1.2rem;
-        }
+    display: flex;
 
-        .upload-area p {
-            margin: 0;
-            color: #777;
-            font-size: .9rem;
-        }
+    gap: 7px;
 
-        #fileInput {
-            display: none;
-        }
+    align-items: center;
 
+    margin-bottom: 32px;
 
-        /* =====================================
-           EDITOR
-        ====================================== */
+    color: #777;
 
-        .editor {
-            display: none;
-            padding: 24px;
-            border-top: 1px solid #e5e5e5;
-        }
+    font-size: .85rem;
 
-        .editor.active {
-            display: block;
-        }
+}
 
+.breadcrumb a {
 
-        /* =====================================
-           IMAGE INFORMATION
-        ====================================== */
+    color: #333;
 
-        .image-info {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
+    text-decoration: underline;
 
-            padding: 14px;
+    text-underline-offset: 3px;
 
-            background: #f7f7f7;
-            border-radius: 12px;
+}
 
-            margin-bottom: 20px;
 
-            font-size: .82rem;
-            color: #555;
-        }
+/* =========================================
+   INTRO
+========================================= */
 
+.tool-intro {
 
-        /* =====================================
-           CONTROLS
-        ====================================== */
+    max-width: 780px;
 
-        .controls-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
+    margin-bottom: 38px;
 
-        .control-box {
-            padding: 15px;
+}
 
-            background: #fafafa;
+.tool-intro h1 {
 
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
-        }
+    margin: 10px 0 17px;
 
-        .control-box.full {
-            grid-column: 1 / -1;
-        }
+    font-size:
+        clamp(
+            2.5rem,
+            7vw,
+            4.8rem
+        );
 
-        .control-box label {
-            display: block;
+    line-height: .98;
 
-            margin-bottom: 8px;
+    letter-spacing: -.06em;
 
-            font-size: .8rem;
-            font-weight: 700;
-        }
+}
 
-        .control-box input,
-        .control-box select {
+.tool-intro p {
 
-            width: 100%;
-            height: 44px;
+    max-width: 700px;
 
-            padding: 0 10px;
+    color: #666;
 
-            border: 1px solid #d5d5d5;
-            border-radius: 9px;
+    font-size: 1.05rem;
 
-            background: #fff;
+    line-height: 1.7;
 
-            font: inherit;
+}
 
-            box-sizing: border-box;
-        }
 
+/* =========================================
+   MAIN TOOL
+========================================= */
 
-        /* =====================================
-           DIMENSIONS
-        ====================================== */
+.resizer-app {
 
-        .dimension-grid {
+    max-width: 900px;
 
-            display: grid;
+    margin: auto;
 
-            grid-template-columns: 1fr 1fr;
+    overflow: hidden;
 
-            gap: 10px;
-        }
+    border: 1px solid #e1e1e1;
 
-        .dimension-grid small {
+    border-radius: 24px;
 
-            display: block;
+    background: #fff;
 
-            margin-top: 5px;
+    box-shadow:
+        0 12px 45px
+        rgba(0,0,0,.06);
 
-            color: #777;
+}
 
-            font-size: .75rem;
-        }
 
-        .ratio-row {
+/* =========================================
+   UPLOAD AREA
+========================================= */
 
-            display: flex;
+.upload-area {
 
-            align-items: center;
+    display: block;
 
-            gap: 8px;
+    margin: 28px;
 
-            margin-top: 12px;
+    padding: 48px 20px;
 
-            font-size: .82rem;
+    border:
+        2px dashed
+        #d5d5d5;
 
-            color: #555;
-        }
+    border-radius: 16px;
 
-        .ratio-row input {
+    text-align: center;
 
-            width: auto;
+    cursor: pointer;
 
-            height: auto;
-        }
+    transition: .2s ease;
 
+}
 
-        /* =====================================
-           TARGET FILE SIZE
-        ====================================== */
+.upload-area:hover,
+.upload-area.dragover {
 
-        .target-row {
+    background: #fafafa;
 
-            display: flex;
+    border-color: #111;
 
-            gap: 10px;
-        }
+}
 
-        .target-row input {
+.upload-icon {
 
-            flex: 1;
-        }
+    margin-bottom: 12px;
 
-        .target-row select {
+    font-size: 30px;
 
-            width: 100px;
-        }
+    font-weight: 800;
 
+}
 
-        /* =====================================
-           PREVIEW
-        ====================================== */
+.upload-area h2 {
 
-        .preview-box {
+    margin: 0 0 8px;
 
-            margin-top: 22px;
+    font-size: 1.25rem;
 
-            padding: 20px;
+}
 
-            border: 1px solid #e5e5e5;
+.upload-area p {
 
-            border-radius: 14px;
+    margin: 0;
 
-            background: #fafafa;
+    color: #777;
 
-            text-align: center;
-        }
+    font-size: .9rem;
 
-        .preview-box img {
+}
 
-            display: block;
+#fileInput {
 
-            max-width: 100%;
+    display: none;
 
-            max-height: 360px;
+}
 
-            margin: auto;
 
-            object-fit: contain;
-        }
+/* =========================================
+   EDITOR
+========================================= */
 
-        .output-info {
+.editor {
 
-            display: flex;
+    display: none;
 
-            justify-content: center;
+    padding: 24px;
 
-            flex-wrap: wrap;
+    border-top:
+        1px solid
+        #e5e5e5;
 
-            gap: 18px;
+}
 
-            margin-top: 14px;
+.editor.active {
 
-            color: #666;
+    display: block;
 
-            font-size: .8rem;
-        }
+}
 
 
-        /* =====================================
-           BUTTONS
-        ====================================== */
+/* =========================================
+   IMAGE INFORMATION
+========================================= */
 
-        .button-row {
+.image-info {
 
-            display: grid;
+    display: flex;
 
-            grid-template-columns: 1fr 1fr;
+    justify-content:
+        space-between;
 
-            gap: 10px;
+    gap: 15px;
 
-            margin-top: 16px;
-        }
+    flex-wrap: wrap;
 
-        .tool-button {
+    padding: 14px;
 
-            min-height: 50px;
+    margin-bottom: 20px;
 
-            border-radius: 10px;
+    border-radius: 12px;
 
-            font: inherit;
+    background: #f7f7f7;
 
-            font-weight: 800;
+    color: #555;
 
-            cursor: pointer;
-        }
+    font-size: .82rem;
 
-        .primary-button {
+}
 
-            border: 0;
 
-            background: #111;
+/* =========================================
+   CONTROLS
+========================================= */
 
-            color: #fff;
-        }
+.controls {
 
-        .secondary-button {
+    display: grid;
 
-            border: 1px solid #d5d5d5;
+    grid-template-columns:
+        1fr 1fr;
 
-            background: #fff;
+    gap: 14px;
 
-            color: #111;
-        }
+}
 
-        .tool-button:disabled {
+.control {
 
-            opacity: .6;
+    padding: 15px;
 
-            cursor: not-allowed;
-        }
+    border:
+        1px solid
+        #e5e5e5;
 
+    border-radius: 12px;
 
-        /* =====================================
-           STATUS
-        ====================================== */
+    background: #fafafa;
 
-        .status {
+}
 
-            min-height: 20px;
+.control.full {
 
-            margin-top: 10px;
+    grid-column:
+        1 / -1;
 
-            text-align: center;
+}
 
-            font-size: .8rem;
+.control label {
 
-            color: #666;
-        }
+    display: block;
 
+    margin-bottom: 8px;
 
-        /* =====================================
-           PRIVACY
-        ====================================== */
+    font-size: .8rem;
 
-        .privacy-note {
+    font-weight: 700;
 
-            margin: 20px 24px 24px;
+}
 
-            padding: 15px;
+.control input,
+.control select {
 
-            border-radius: 12px;
+    width: 100%;
 
-            background: #f7f7f7;
+    height: 44px;
 
-            color: #666;
+    padding:
+        0 10px;
 
-            font-size: .82rem;
+    box-sizing: border-box;
 
-            line-height: 1.5;
-        }
+    border:
+        1px solid
+        #d5d5d5;
 
-        .privacy-note strong {
+    border-radius: 9px;
 
-            color: #222;
-        }
+    background: #fff;
 
+    font: inherit;
 
-        /* =====================================
-           SEO CONTENT
-        ====================================== */
+}
 
-        .tool-content {
 
-            max-width: 900px;
+/* =========================================
+   DIMENSION GRID
+========================================= */
 
-            margin: 55px auto 0;
-        }
+.dimension-grid {
 
-        .tool-content h2 {
+    display: grid;
 
-            font-size: 2rem;
+    grid-template-columns:
+        1fr 1fr;
 
-            margin-bottom: 12px;
-        }
+    gap: 10px;
 
-        .tool-content h3 {
+}
 
-            margin-top: 28px;
-        }
+.dimension-help {
 
-        .tool-content p {
+    display: block;
 
-            color: #666;
+    margin-top: 6px;
 
-            line-height: 1.7;
-        }
+    color: #777;
 
+    font-size: .74rem;
 
-        /* =====================================
-           MOBILE RESPONSIVE
-        ====================================== */
+}
 
-        @media (max-width: 700px) {
 
-            .controls-grid {
+/* =========================================
+   PRESET ROW
+========================================= */
 
-                grid-template-columns: 1fr;
-            }
+.preset-row {
 
-            .control-box.full {
+    display: grid;
 
-                grid-column: auto;
-            }
+    grid-template-columns:
+        1fr 1fr;
 
-            .dimension-grid {
+    gap: 10px;
 
-                grid-template-columns: 1fr;
-            }
+}
 
-            .button-row {
 
-                grid-template-columns: 1fr;
-            }
+/* =========================================
+   LOCK RATIO
+========================================= */
 
-            .target-row {
+.lock-row {
 
-                align-items: stretch;
-            }
+    display: flex;
 
-            .target-row select {
+    align-items: center;
 
-                width: 95px;
-            }
+    gap: 9px;
 
-            .image-info {
+    margin-top: 14px;
 
-                flex-direction: column;
-            }
+    color: #555;
 
-        }
+    font-size: .85rem;
 
-    </style>
+}
+
+.lock-row input {
+
+    width: auto;
+
+    height: auto;
+
+}
+
+
+/* =========================================
+   PART 2 PLACEHOLDER
+========================================= */
+
+#part2 {
+
+    display: block;
+
+}
+
+
+/* =========================================
+   PREVIEW
+========================================= */
+
+.preview {
+
+    margin-top: 22px;
+
+    padding: 20px;
+
+    min-height: 120px;
+
+    border:
+        1px solid
+        #e5e5e5;
+
+    border-radius: 14px;
+
+    background: #fafafa;
+
+    text-align: center;
+
+}
+
+.preview img {
+
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 360px;
+
+    margin: auto;
+
+    object-fit: contain;
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.button-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 16px;
+
+}
+
+.primary-button,
+.secondary-button {
+
+    min-height: 50px;
+
+    padding:
+        0 18px;
+
+    border-radius: 10px;
+
+    font: inherit;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+.primary-button {
+
+    border: 0;
+
+    background: #111;
+
+    color: #fff;
+
+}
+
+.secondary-button {
+
+    border:
+        1px solid
+        #d5d5d5;
+
+    background: #fff;
+
+    color: #111;
+
+}
+
+.primary-button:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status {
+
+    min-height: 20px;
+
+    margin-top: 10px;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: .82rem;
+
+}
+
+
+/* =========================================
+   PRIVACY
+========================================= */
+
+.privacy-note {
+
+    margin: 20px 24px 24px;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background: #f7f7f7;
+
+    color: #666;
+
+    font-size: .82rem;
+
+    line-height: 1.6;
+
+}
+
+.privacy-note strong {
+
+    color: #222;
+
+}
+
+
+/* =========================================
+   TOOL INFORMATION
+========================================= */
+
+.tool-information {
+
+    max-width: 900px;
+
+    margin:
+        60px auto 0;
+
+}
+
+.tool-information h2 {
+
+    margin-top: 40px;
+
+    font-size: 2rem;
+
+}
+
+.tool-information h3 {
+
+    margin-top: 30px;
+
+}
+
+.tool-information p {
+
+    color: #666;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .controls {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .control.full {
+
+        grid-column: auto;
+
+    }
+
+    .dimension-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .preset-row {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .button-row {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .image-info {
+
+        flex-direction:
+            column;
+
+    }
+
+    .editor {
+
+        padding: 18px;
+
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -526,23 +701,27 @@
 <body>
 
 
-<!-- =====================================
+<!-- =========================================
      HEADER
-====================================== -->
+========================================= -->
 
 <header class="site-header">
 
     <div class="container header-inner">
 
-        <a href="../../../"
-           class="logo">
-
+        <a
+            href="../../../"
+            class="logo"
+            aria-label="Toolton Home"
+        >
             Toolton
-
         </a>
 
 
-        <nav class="navigation">
+        <nav
+            class="navigation"
+            aria-label="Main navigation"
+        >
 
             <a href="../../../#tools">
                 Tools
@@ -560,500 +739,479 @@
 
 
 
-<!-- =====================================
-     MAIN CONTENT
-====================================== -->
+<!-- =========================================
+     MAIN
+========================================= -->
 
 <main class="resizer-page">
 
-    <div class="resizer-container">
+    <div class="container">
 
 
-        <!-- =================================
-             TOOL INTRODUCTION
-        ================================== -->
+        <!-- BREADCRUMB -->
 
-        <section class="tool-heading">
+        <div class="breadcrumb">
 
-            <span class="tool-badge">
-                FREE ONLINE TOOL
+            <a href="../../../">
+                Toolton
+            </a>
+
+            <span>
+                ›
+            </span>
+
+            <span>
+                Image Resizer
+            </span>
+
+        </div>
+
+
+
+        <!-- INTRO -->
+
+        <div class="tool-intro">
+
+            <span class="section-label">
+                FREE IMAGE TOOL
             </span>
 
             <h1>
-                Image Resizer
+                Free Image Resizer Online
             </h1>
 
             <p>
                 Resize JPG, PNG and WebP images to exact
-                dimensions. Choose pixels, centimetres or
-                inches, use ready-made presets, control
-                quality and reduce file size directly in
-                your browser.
+                dimensions. Choose pixels, centimetres
+                or inches, create passport-size photos
+                and signatures, control quality and
+                download your resized image directly
+                in your browser.
             </p>
 
-        </section>
+        </div>
 
 
 
         <!-- =====================================
-             MAIN TOOL
+             TOOL
         ====================================== -->
 
-        <section class="resizer-card">
+        <section
+            class="resizer-app"
+            aria-label="Free Image Resizer"
+        >
 
 
             <!-- =================================
-                 PART 2
-                 UPLOAD + DIMENSIONS + PRESETS
+                 IMAGE UPLOAD
             ================================== -->
 
+            <label
+                class="upload-area"
+                id="uploadArea"
+                for="fileInput"
+            >
 
-            <!-- =====================================
-     PART 2 — UPLOAD + DIMENSIONS + PRESETS
+                <div class="upload-icon">
+                    IMG
+                </div>
+
+                <h2>
+                    Choose an image
+                </h2>
+
+                <p>
+                    Click to upload or drag and drop
+                    JPG, PNG or WebP
+                </p>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/jpeg,image/png,image/webp"
+                >
+
+            </label>
+
+
+
+            <!-- =================================
+                 EDITOR
+            ================================== -->
+
+            <div
+                class="editor"
+                id="editor"
+            >
+
+
+                <!-- IMAGE INFO -->
+
+                <div class="image-info">
+
+                    <span id="originalInfo">
+                        Original: —
+                    </span>
+
+                    <span id="fileInfo">
+                        File size: —
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================
+                     PART 1 CONTROLS
+                ================================== -->
+
+                <div class="controls">
+
+
+                    <!-- PRESETS -->
+
+                    <div class="control full">
+
+                        <label for="presetInput">
+                            Quick Size Preset
+                        </label>
+
+                        <select id="presetInput">
+
+                            <option value="custom">
+                                Custom Dimensions
+                            </option>
+
+                            <option value="passport35x45">
+                                Passport Photo — 35 × 45 mm
+                            </option>
+
+                            <option value="passport2x2">
+                                Passport Photo — 2 × 2 inch
+                            </option>
+
+                            <option value="passport25x35">
+                                Passport Photo — 25 × 35 mm
+                            </option>
+
+                            <option value="signature">
+                                Signature — 40 × 20 mm
+                            </option>
+
+                            <option value="square1">
+                                Square Photo — 1 × 1 inch
+                            </option>
+
+                            <option value="a4">
+                                A4 — 210 × 297 mm
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- UNIT -->
+
+                    <div class="control">
+
+                        <label for="unitInput">
+                            Measurement Unit
+                        </label>
+
+                        <select id="unitInput">
+
+                            <option value="px">
+                                Pixels (px)
+                            </option>
+
+                            <option value="cm">
+                                Centimetres (cm)
+                            </option>
+
+                            <option value="mm">
+                                Millimetres (mm)
+                            </option>
+
+                            <option value="in">
+                                Inches (in)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- DPI -->
+
+                    <div class="control">
+
+                        <label for="dpiInput">
+                            Resolution (DPI)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="dpiInput"
+                            value="300"
+                            min="72"
+                            max="600"
+                            step="1"
+                        >
+
+                    </div>
+
+
+
+                    <!-- WIDTH + HEIGHT -->
+
+                    <div class="control full">
+
+                        <label>
+                            Exact Dimensions
+                        </label>
+
+
+                        <div class="dimension-grid">
+
+
+                            <div>
+
+                                <input
+                                    type="number"
+                                    id="widthInput"
+                                    min="1"
+                                    max="10000"
+                                    step="0.01"
+                                    placeholder="Width"
+                                >
+
+                                <span
+                                    class="dimension-help"
+                                >
+                                    Width
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <input
+                                    type="number"
+                                    id="heightInput"
+                                    min="1"
+                                    max="10000"
+                                    step="0.01"
+                                    placeholder="Height"
+                                >
+
+                                <span
+                                    class="dimension-help"
+                                >
+                                    Height
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <label
+                            class="lock-row"
+                        >
+
+                            <input
+                                type="checkbox"
+                                id="lockRatio"
+                                checked
+                            >
+
+                            <span>
+                                Lock aspect ratio
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                </div>
+
+
+                <!-- =================================
+                     PART 2 WILL BE INSERTED HERE
+                ================================== -->
+
+                <div id="part2">
+
+                    <!-- PART 2 GOES HERE -->
+
+<!-- =====================================
+     PART 2 — RESIZE + QUALITY + OUTPUT
 ====================================== -->
 
-<div class="upload-area"
-     id="uploadArea">
+<!-- QUICK RESIZE -->
 
-    <div class="upload-icon">
-        IMG
-    </div>
+<div class="control full">
 
-    <h2>
-        Choose an image
-    </h2>
+    <label for="percentageInput">
+        Quick Resize
+    </label>
 
-    <p>
-        Click to upload or drag & drop JPG, PNG or WebP
-    </p>
+    <select id="percentageInput">
+
+        <option value="custom">
+            Custom / Exact Size
+        </option>
+
+        <option value="25">
+            25%
+        </option>
+
+        <option value="50">
+            50%
+        </option>
+
+        <option value="75">
+            75%
+        </option>
+
+        <option value="100">
+            100%
+        </option>
+
+        <option value="125">
+            125%
+        </option>
+
+        <option value="150">
+            150%
+        </option>
+
+        <option value="200">
+            200%
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- OUTPUT FORMAT -->
+
+<div class="control">
+
+    <label for="formatInput">
+        Output Format
+    </label>
+
+    <select id="formatInput">
+
+        <option value="image/jpeg">
+            JPG
+        </option>
+
+        <option value="image/png">
+            PNG
+        </option>
+
+        <option value="image/webp">
+            WebP
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- QUALITY -->
+
+<div class="control">
+
+    <label for="qualityInput">
+
+        Image Quality:
+        <span id="qualityValue">
+            90
+        </span>%
+
+    </label>
 
     <input
-        type="file"
-        id="fileInput"
-        accept="image/jpeg,image/png,image/webp"
+        type="range"
+        id="qualityInput"
+        min="10"
+        max="100"
+        value="90"
+        step="1"
     >
 
 </div>
 
 
-<div class="editor" id="editor">
 
+<!-- TARGET FILE SIZE -->
 
-    <!-- ORIGINAL IMAGE INFORMATION -->
+<div class="control full">
 
-    <div class="image-info">
+    <label for="targetSizeInput">
 
-        <span id="originalInfo">
-            Original: —
+        Target File Size
+        <span style="
+            font-weight:400;
+            color:#777;
+        ">
+            (Optional)
         </span>
 
-        <span id="fileInfo">
-            File size: —
-        </span>
+    </label>
 
-    </div>
 
-
-
-    <div class="controls-grid">
-
-
-        <!-- ================================
-             SIZE PRESETS
-        ================================= -->
-
-        <div class="control-box full">
-
-            <label for="presetInput">
-                Quick Size Preset
-            </label>
-
-            <select id="presetInput">
-
-                <option value="custom">
-                    Custom Dimensions
-                </option>
-
-                <option value="passport35x45">
-                    Passport Photo — 35 × 45 mm
-                </option>
-
-                <option value="passport2x2">
-                    Passport Photo — 2 × 2 inch
-                </option>
-
-                <option value="signature">
-                    Signature — 40 × 20 mm
-                </option>
-
-                <option value="square">
-                    Square Photo — 1 × 1 inch
-                </option>
-
-                <option value="a4">
-                    A4 — 210 × 297 mm
-                </option>
-
-            </select>
-
-        </div>
-
-
-
-        <!-- ================================
-             WIDTH + HEIGHT
-        ================================= -->
-
-        <div class="control-box full">
-
-            <label>
-                Exact Dimensions
-            </label>
-
-
-            <div class="dimension-grid">
-
-
-                <div>
-
-                    <input
-                        type="number"
-                        id="widthInput"
-                        min="1"
-                        max="10000"
-                        step="1"
-                        placeholder="Width"
-                    >
-
-                    <small>
-                        Width
-                    </small>
-
-                </div>
-
-
-                <div>
-
-                    <input
-                        type="number"
-                        id="heightInput"
-                        min="1"
-                        max="10000"
-                        step="1"
-                        placeholder="Height"
-                    >
-
-                    <small>
-                        Height
-                    </small>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- ASPECT RATIO -->
-
-            <label class="ratio-row">
-
-                <input
-                    type="checkbox"
-                    id="lockRatio"
-                    checked
-                >
-
-                <span>
-                    Lock aspect ratio
-                </span>
-
-            </label>
-
-        </div>
-
-
-
-        <!-- ================================
-             UNIT
-        ================================= -->
-
-        <div class="control-box">
-
-            <label for="unitInput">
-                Measurement Unit
-            </label>
-
-            <select id="unitInput">
-
-                <option value="px">
-                    Pixels (px)
-                </option>
-
-                <option value="cm">
-                    Centimetres (cm)
-                </option>
-
-                <option value="in">
-                    Inches (in)
-                </option>
-
-            </select>
-
-        </div>
-
-
-
-        <!-- ================================
-             DPI
-        ================================= -->
-
-        <div class="control-box">
-
-            <label for="dpiInput">
-                Resolution (DPI)
-            </label>
-
-            <input
-                type="number"
-                id="dpiInput"
-                value="300"
-                min="72"
-                max="600"
-                step="1"
-            >
-
-        </div>
-
-
-
-        <!-- ================================
-             DIMENSION HELP
-        ================================= -->
-
-        <div class="control-box full">
-
-            <small style="
-                display:block;
-                color:#777;
-                line-height:1.6;
-            ">
-
-                <strong>Tip:</strong>
-                For printing or official forms, you can
-                enter dimensions in CM or inches and choose
-                the required DPI. Turn off
-                <strong>Lock aspect ratio</strong> when you
-                need an exact width and height, such as a
-                passport photo or signature.
-
-            </small>
-
-        </div>
-
-
-    </div>
-
-
-</div>
-
-
-
-            <!-- =================================
-                 PART 3
-                 QUALITY + TARGET SIZE + PREVIEW
-            ================================== -->
-
-
-            <!-- =====================================
-     PART 3 — OUTPUT + COMPRESSION + PREVIEW
-====================================== -->
-
-<div class="controls-grid">
-
-
-    <!-- ================================
-         QUICK RESIZE
-    ================================= -->
-
-    <div class="control-box">
-
-        <label for="percentageInput">
-            Resize Percentage
-        </label>
-
-        <select id="percentageInput">
-
-            <option value="custom">
-                Custom / Exact Size
-            </option>
-
-            <option value="25">
-                25%
-            </option>
-
-            <option value="50">
-                50%
-            </option>
-
-            <option value="75">
-                75%
-            </option>
-
-            <option value="100">
-                100%
-            </option>
-
-            <option value="125">
-                125%
-            </option>
-
-            <option value="150">
-                150%
-            </option>
-
-            <option value="200">
-                200%
-            </option>
-
-        </select>
-
-    </div>
-
-
-
-    <!-- ================================
-         OUTPUT FORMAT
-    ================================= -->
-
-    <div class="control-box">
-
-        <label for="formatInput">
-            Output Format
-        </label>
-
-        <select id="formatInput">
-
-            <option value="image/jpeg">
-                JPG
-            </option>
-
-            <option value="image/png">
-                PNG
-            </option>
-
-            <option value="image/webp">
-                WebP
-            </option>
-
-        </select>
-
-    </div>
-
-
-
-    <!-- ================================
-         IMAGE QUALITY
-    ================================= -->
-
-    <div class="control-box full">
-
-        <label for="qualityInput">
-
-            Image Quality:
-            <span id="qualityValue">
-                90
-            </span>%
-
-        </label>
-
+    <div class="target-row">
 
         <input
-            type="range"
-            id="qualityInput"
-            min="10"
-            max="100"
-            value="90"
+            type="number"
+            id="targetSizeInput"
+            min="1"
             step="1"
+            placeholder="Example: 100"
         >
 
 
-        <small style="
-            display:block;
-            margin-top:6px;
-            color:#777;
-        ">
+        <select id="targetUnitInput">
 
-            Higher quality gives better image quality
-            but may create a larger file.
+            <option value="KB">
+                KB
+            </option>
 
-        </small>
+            <option value="MB">
+                MB
+            </option>
 
-    </div>
-
-
-
-    <!-- ================================
-         TARGET FILE SIZE
-    ================================= -->
-
-    <div class="control-box full">
-
-        <label for="targetSizeInput">
-
-            Target File Size
-
-            <span style="
-                font-weight:400;
-                color:#777;
-            ">
-
-                (Optional)
-
-            </span>
-
-        </label>
-
-
-        <div class="target-row">
-
-            <input
-                type="number"
-                id="targetSizeInput"
-                min="1"
-                step="1"
-                placeholder="Example: 100"
-            >
-
-
-            <select id="targetUnitInput">
-
-                <option value="KB">
-                    KB
-                </option>
-
-                <option value="MB">
-                    MB
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <small style="
-            display:block;
-            margin-top:7px;
-            color:#777;
-            line-height:1.5;
-        ">
-
-            Optional. Useful when a website, application
-            or form requires a specific maximum file size.
-
-        </small>
+        </select>
 
     </div>
 
+
+    <small style="
+        display:block;
+        margin-top:7px;
+        color:#777;
+        line-height:1.5;
+    ">
+
+        Useful when an online form or application
+        requires a maximum file size.
+
+    </small>
 
 </div>
 
@@ -1063,8 +1221,7 @@
      PREVIEW
 ====================================== -->
 
-<div class="preview-box">
-
+<div class="preview">
 
     <div id="previewPlaceholder">
 
@@ -1087,21 +1244,28 @@
     >
 
 
-    <div class="output-info">
-
+    <div
+        class="output-info"
+        style="
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            gap:18px;
+            margin-top:14px;
+            color:#666;
+            font-size:.8rem;
+        "
+    >
 
         <span id="dimensionInfo">
             Output: —
         </span>
 
-
         <span id="sizeInfo">
             File size: —
         </span>
 
-
     </div>
-
 
 </div>
 
@@ -1113,10 +1277,9 @@
 
 <div class="button-row">
 
-
     <button
         type="button"
-        class="tool-button primary-button"
+        class="primary-button"
         id="resizeButton"
         disabled
     >
@@ -1128,7 +1291,7 @@
 
     <button
         type="button"
-        class="tool-button secondary-button"
+        class="secondary-button"
         id="resetButton"
     >
 
@@ -1136,39 +1299,40 @@
 
     </button>
 
-
 </div>
 
 
 
-<!-- =====================================
-     STATUS MESSAGE
-====================================== -->
+<!-- STATUS -->
 
 <div
     class="status"
     id="status"
     aria-live="polite"
 ></div>
+                    
+
+                </div>
 
 
+            </div>
 
-<!-- =====================================
-     PRIVACY MESSAGE
-====================================== -->
 
-<div class="privacy-note">
+            <!-- =================================
+                 PRIVACY
+            ================================== -->
 
-    <strong>
-        Privacy-focused:
-    </strong>
+            <div class="privacy-note">
 
-    Your image is processed directly in your browser.
-    Toolton does not need to upload your selected image
-    to a server for resizing.
+                <strong>
+                    Privacy:
+                </strong>
 
-</div>
+                Your image is processed directly in
+                your browser. It is not uploaded to
+                a Toolton server for resizing.
 
+            </div>
 
 
         </section>
@@ -1176,21 +1340,18 @@
 
 
         <!-- =====================================
-             PART 4
-             SEO + FAQ
+             PART 3 WILL BE INSERTED HERE
         ====================================== -->
 
+        <div id="part3">
 
-        <!-- =====================================
-     PART 4 — SEO CONTENT + FAQ
+            <!-- PART 3 GOES HERE -->
+
+<!-- =====================================
+     PART 3 — SEO CONTENT + FAQ
 ====================================== -->
 
-<section class="tool-content">
-
-
-    <!-- ================================
-         ABOUT THE TOOL
-    ================================= -->
+<section class="tool-information">
 
     <h2>
         Free Image Resizer Online
@@ -1198,35 +1359,46 @@
 
     <p>
         Toolton Image Resizer is a free online tool that
-        lets you resize photos and images to exact
-        dimensions directly in your browser. You can
-        resize JPG, PNG and WebP images without creating
-        an account or installing software.
+        lets you resize JPG, PNG and WebP images to exact
+        dimensions. Resize photos in pixels, centimetres,
+        millimetres or inches without installing software
+        or creating an account.
+    </p>
+
+
+    <h2>
+        Resize Photos to Exact Size
+    </h2>
+
+    <p>
+        Enter the exact width and height you need and choose
+        your preferred measurement unit. You can keep the
+        original aspect ratio or unlock it when you need
+        completely independent width and height values.
     </p>
 
 
     <h3>
-        Resize Images to Exact Dimensions
+        Passport Photo Resizer
     </h3>
 
     <p>
-        Set a custom width and height in pixels, centimetres
-        or inches. You can keep the original aspect ratio
-        or turn it off when you need an exact width and
-        height.
+        Create commonly required passport-photo dimensions
+        using the built-in presets. You can also enter a
+        custom size when a particular application or
+        organisation requires a different dimension.
     </p>
 
 
     <h3>
-        Passport Photo and Signature Sizes
+        Signature and Document Sizes
     </h3>
 
     <p>
-        Use the built-in size presets for common requirements
-        such as passport photos, square photos, signatures
-        and A4 documents. You can also change the dimensions
-        manually whenever a specific application requires a
-        different size.
+        Resize signatures, document images and other
+        photographs using preset or custom dimensions.
+        DPI settings are available when you need to work
+        with physical print dimensions.
     </p>
 
 
@@ -1235,61 +1407,79 @@
     </h3>
 
     <p>
-        Adjust image quality and optionally set a target file
-        size in KB or MB. This can be useful when uploading
-        photographs to forms, websites, applications or
-        documents that have file-size limits.
+        Adjust image quality and optionally specify a target
+        file size in KB or MB. This is useful for online
+        forms and applications that limit the maximum image
+        size.
     </p>
 
 
     <h3>
-        Resize Images Without Login
+        Convert JPG, PNG and WebP
     </h3>
 
     <p>
-        Toolton is designed to be simple and accessible.
-        No account or login is required to use the Image
-        Resizer.
+        Resize your image and choose JPG, PNG or WebP as the
+        output format. This allows you to resize and convert
+        an image in one simple step.
     </p>
 
 
     <h3>
-        Privacy-Focused Image Resizing
+        No Login Required
+    </h3>
+
+    <p>
+        Toolton Image Resizer is designed to be simple and
+        accessible. You can use the tool without creating an
+        account or signing in.
+    </p>
+
+
+    <h3>
+        Privacy-Focused
     </h3>
 
     <p>
         Image processing is performed directly in your
         browser. Your selected image does not need to be
-        uploaded to a Toolton server for the resizing
-        process.
+        uploaded to a Toolton server for resizing.
     </p>
 
 
-    <!-- ================================
+
+    <!-- =================================
          HOW TO USE
-    ================================= -->
+    ================================== -->
 
     <h2>
-        How to Resize an Image
+        How to Resize an Image Online
     </h2>
 
     <ol>
 
         <li>
-            Choose or drag and drop your image.
+            Choose an image or drag and drop it into the
+            upload area.
         </li>
 
         <li>
-            Select a preset or enter your own dimensions.
+            Select a preset or enter your own width and
+            height.
         </li>
 
         <li>
-            Choose pixels, centimetres or inches.
+            Choose pixels, centimetres, millimetres or
+            inches.
         </li>
 
         <li>
-            Set DPI if required for printing or official
-            document purposes.
+            Set the DPI if required.
+        </li>
+
+        <li>
+            Keep the aspect ratio locked or unlock it for
+            independent dimensions.
         </li>
 
         <li>
@@ -1301,15 +1491,19 @@
         </li>
 
         <li>
-            Click <strong>Resize & Download</strong>.
+            Click
+            <strong>
+                Resize & Download
+            </strong>.
         </li>
 
     </ol>
 
 
-    <!-- ================================
+
+    <!-- =================================
          FAQ
-    ================================= -->
+    ================================== -->
 
     <h2>
         Frequently Asked Questions
@@ -1321,66 +1515,76 @@
     </h3>
 
     <p>
-        Yes. The Toolton Image Resizer is designed to be
-        free to use without requiring a login.
+        Yes. Toolton Image Resizer is free to use and does
+        not require an account or login.
     </p>
 
 
     <h3>
-        Can I resize an image to a specific width and height?
+        Can I resize an image to an exact width and height?
     </h3>
 
     <p>
-        Yes. You can enter the exact width and height you
-        need. You can also turn off the aspect-ratio lock
-        when width and height need to be independent.
+        Yes. Enter the required width and height and select
+        the appropriate measurement unit. You can also
+        unlock the aspect ratio when the two dimensions need
+        to be independent.
     </p>
 
 
     <h3>
-        Can I resize an image in CM or inches?
+        Can I resize an image in centimetres or inches?
     </h3>
 
     <p>
-        Yes. You can select pixels, centimetres or inches.
-        DPI can also be specified when working with physical
-        print dimensions.
+        Yes. The tool supports pixels, centimetres,
+        millimetres and inches. DPI can be adjusted for
+        physical-size requirements.
     </p>
 
 
     <h3>
-        Can I make a passport-size photo?
+        Can I create a passport-size photo?
     </h3>
 
     <p>
-        Yes. The tool includes common passport-photo presets
-        and also allows you to enter custom dimensions.
-        Always check the exact size required by the
-        organisation or application you are submitting to.
+        Yes. Select one of the passport-photo presets or
+        enter a custom dimension. Always verify the exact
+        photo requirements of the organisation or application
+        you are submitting to.
     </p>
 
 
     <h3>
-        Can I reduce an image to a specific KB or MB size?
+        Can I resize a signature?
     </h3>
 
     <p>
-        You can enter an optional target file size in KB or
-        MB. The tool will attempt to adjust compression to
-        get as close as practical to the requested size.
-        Exact file size can vary depending on the image and
-        output format.
+        Yes. A signature preset is available, and you can
+        also enter your own required dimensions.
     </p>
 
 
     <h3>
-        Does Toolton upload my photos?
+        Can I reduce an image to a specific KB?
     </h3>
 
     <p>
-        The resizing process is designed to happen directly
-        in your browser, so your image does not need to be
-        uploaded to a Toolton server.
+        You can enter a target file size in KB or MB.
+        For JPG and WebP images, the tool can adjust
+        compression to get as close as practical to the
+        requested size.
+    </p>
+
+
+    <h3>
+        Does Toolton upload my image?
+    </h3>
+
+    <p>
+        The resizing process is designed to run directly in
+        your browser. Your selected image does not need to be
+        uploaded to a Toolton server for the resizing process.
     </p>
 
 
@@ -1389,18 +1593,53 @@
     </h3>
 
     <p>
-        The tool supports JPG, PNG and WebP images.
-        Depending on the selected output format, you can
-        convert an image while resizing it.
+        You can upload JPG, PNG and WebP images and choose
+        JPG, PNG or WebP as the output format.
     </p>
 
+
+    <h3>
+        Can I use the Image Resizer on my phone?
+    </h3>
+
+    <p>
+        Yes. The tool is designed to work in modern mobile,
+        tablet and desktop browsers.
+    </p>
+
+
+    <!-- =================================
+         SUGGESTION / FEEDBACK
+    ================================== -->
+
+    <div
+        style="
+            margin-top:45px;
+            padding:22px;
+            border:1px solid #e5e5e5;
+            border-radius:16px;
+            background:#fafafa;
+        "
+    >
+
+        <h3 style="margin-top:0;">
+            Need another image tool?
+        </h3>
+
+        <p style="margin-bottom:0;">
+            If you have an idea for an image tool that would
+            be useful to you, let us know. We are continuously
+            working on adding simple and practical free tools
+            to Toolton.
+        </p>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================
-     END PART 4
-====================================== -->
+            
+        </div>
 
 
     </div>
@@ -1408,15 +1647,13 @@
 </main>
 
 
-
-<!-- =====================================
+<!-- =========================================
      FOOTER
-====================================== -->
+========================================= -->
 
 <footer class="site-footer">
 
     <div class="container footer-inner">
-
 
         <div>
 
@@ -1457,24 +1694,16 @@
 
 
         <p class="copyright">
-
             © 2026 Toolton. All rights reserved.
-
         </p>
-
 
     </div>
 
 </footer>
 
 
-<!-- =====================================
-     JAVASCRIPT
-     PART 5 WILL CONNECT SCRIPT.JS
-====================================== -->
-
 <script src="script.js"></script>
 
-
 </body>
+
 </html>
